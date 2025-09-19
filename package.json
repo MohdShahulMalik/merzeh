@@ -1,0 +1,12 @@
+{
+	"type": "module",
+	"scripts": {
+		"build:css": "postcss ./style/main.scss -o ./style/output/main.css",
+		"watch:css": "postcss ./style/main.scss -o ./style/output/main.css --watch"
+	},
+	"devDependencies": {
+		"@tailwindcss/postcss": "^4.1.13",
+		"postcss-cli": "^11.0.1",
+		"tailwindcss": "^4.1.13"
+	}
+}
