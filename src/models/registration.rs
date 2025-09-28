@@ -1,27 +1,22 @@
 use garde::Validate;
+use serde::Deserialize;
 
-#[derive(Debug, Validate)]
+#[derive(Debug, Validate, Deserialize)]
 pub struct FormData {
     #[garde(dive)]
-    identifier: UserIdentifier,
+    pub identifier: UserIdentifier,
     #[garde(length(min = 8))]
-    password: String
+    pub password: String
 }
 
-#[derive(Debug, Validate)]
+#[derive(Debug, Validate, Deserialize)]
 pub enum UserIdentifier {
     Email(
-        #[garde(
-            email,
-            message = "Please enter a valid email address."
-        )]
+        #[garde(email)]
         String
     ),
     Mobile(
-        #[garde(
-            pattern(r"^[6-9]\d{9}$"),
-            message = "Please enter a valid 10 digit Indian mobile number"
-        )]
+        #[garde(pattern(r"^[6-9][0-9]{9}$"))]
         String
     ),
 }

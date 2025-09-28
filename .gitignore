@@ -14,7 +14,10 @@ Cargo.lock
 *.pdb
 
 # Node Modules
-
-
-# Node Modules
 node_modules/
+
+#TailwindCSS Output File
+style/output/
+
+#Application Environment Variables
+.env
