@@ -21,3 +21,6 @@ style/output/
 
 #Application Environment Variables
 .env
+
+#Helix Config
+.helix

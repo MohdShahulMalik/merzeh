@@ -1,7 +1,7 @@
 use garde::Validate;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Validate, Deserialize)]
+#[derive(Debug, Validate, Deserialize, Serialize)]
 pub struct FormData {
     #[garde(dive)]
     pub identifier: UserIdentifier,
@@ -9,7 +9,7 @@ pub struct FormData {
     pub password: String
 }
 
-#[derive(Debug, Validate, Deserialize)]
+#[derive(Debug, Validate, Deserialize, Serialize)]
 pub enum UserIdentifier {
     Email(
         #[garde(email)]

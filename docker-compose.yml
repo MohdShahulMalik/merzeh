@@ -5,7 +5,7 @@ services:
     image: surrealdb/surrealdb:latest
     container_name: surrealdb
     ports:
-      - "8000:8000"
+      - "${SURREAL_PORT}:${SURREAL_PORT}"
     volumes:
       - surreal_data:/data
     
