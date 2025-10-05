@@ -1,13 +1,11 @@
-version: '3.8'
-
 services:
   surrealdb:
     image: surrealdb/surrealdb:latest
     container_name: surrealdb
     ports:
-      - "${SURREAL_PORT}:${SURREAL_PORT}"
+      - "${SURREAL_PORT}:8000"
     volumes:
-      - surreal_data:/data
+      - ./surreal_data:/data
     
     # Pass variables from your .env file into the container's environment.
     # Docker Compose automatically reads from the .env file and substitutes ${...}
@@ -19,9 +17,7 @@ services:
     # NOTE THE DOUBLE DOLLAR SIGNS ($$)! This is crucial.
     command: >
       start
-      --user $${SURREAL_USER}
-      --pass $${SURREAL_PASS}
-      file:///data/mydatabase.db
+      rocksdb:/data/merzah_database.db
     
     restart: unless-stopped
 

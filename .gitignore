@@ -16,11 +16,14 @@ Cargo.lock
 # Node Modules
 node_modules/
 
-#TailwindCSS Output File
+# TailwindCSS Output File
 style/output/
 
-#Application Environment Variables
+# Application Environment Variables
 .env
 
-#Helix Config
+# SurrealDB Config
+.surrealdb
+
+# Helix Config
 .helix

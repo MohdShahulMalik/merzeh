@@ -1,35 +1,25 @@
-use anyhow::{anyhow, Context, Result};
+use anyhow::{anyhow, Result};
 use garde::Validate;
 use serde::{Deserialize, Serialize};
 use surrealdb::engine::remote::ws::Client;
 use surrealdb::Surreal;
-use tokio::runtime::Runtime;
+use crate::models::user::Identifier;
 
 #[derive(Debug, Validate, Deserialize, Serialize)]
 pub struct FormData {
+    #[garde(skip)]
+    pub name: String,
     #[garde(dive)]
-    pub identifier: UserIdentifier,
+    pub identifier: Identifier,
     #[garde(length(min = 8))]
     pub password: String
-}
-
-#[derive(Debug, Validate, Deserialize, Serialize)]
-pub enum UserIdentifier {
-    Email(
-        #[garde(email)]
-        String
-    ),
-    Mobile(
-        #[garde(pattern(r"^[6-9][0-9]{9}$"))]
-        String
-    ),
 }
 
 impl FormData {
     pub async fn validate_uniqueness(&self, db: &&'static Surreal<Client>) -> Result<()> {
         let (field, value) = match &self.identifier {
-            UserIdentifier::Email(email) => ("email", email.to_string()),
-            UserIdentifier::Mobile(mobile) => ("mobile", mobile.to_string()),
+            Identifier::Email(email) => ("email", email.to_string()),
+            Identifier::Mobile(mobile) => ("mobile", mobile.to_string()),
         };
 
         let query_str = format!("SELECT * FROM user WHERE {} = $value", field);
