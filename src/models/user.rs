@@ -6,7 +6,6 @@ use serde::{Serialize, Deserialize};
 pub struct CreateUser {
     pub display_name: String,
     pub password_hash: String,
-    pub role: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -21,7 +20,9 @@ pub struct User {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct UpdateUser {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub role: Option<String>,
     pub updated_at: Datetime,
 }

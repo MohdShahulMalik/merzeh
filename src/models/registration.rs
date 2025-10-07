@@ -7,7 +7,7 @@ use crate::models::user::Identifier;
 
 #[derive(Debug, Validate, Deserialize, Serialize)]
 pub struct FormData {
-    #[garde(skip)]
+    #[garde(length(min = 2, max = 100))]
     pub name: String,
     #[garde(dive)]
     pub identifier: Identifier,

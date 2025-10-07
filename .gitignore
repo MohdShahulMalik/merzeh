@@ -21,9 +21,20 @@ style/output/
 
 # Application Environment Variables
 .env
+.env.local
+.env.*.local
 
 # SurrealDB Config
 .surrealdb
 
 # Helix Config
 .helix
+
+# Database files
+surreal_data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Docker volumes
+*_data/
