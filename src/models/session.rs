@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use surrealdb:: RecordId;
+use surrealdb::RecordId;
 use surrealdb::sql::Datetime;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -23,5 +23,5 @@ pub struct UpdateSession {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub session_token: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub expires_at: Option<Datetime>
+    pub expires_at: Option<Datetime>,
 }

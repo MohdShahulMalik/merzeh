@@ -1,5 +1,5 @@
 use base64::{Engine as _, engine::general_purpose};
-use rand::{thread_rng, Rng};
+use rand::{Rng, thread_rng};
 
 pub fn generate_token() -> String {
     let mut token_bytes = [0u8; 32];

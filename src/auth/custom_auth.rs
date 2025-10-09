@@ -1,20 +1,31 @@
-use crate::models::{registration::FormData, user::{CreateUser, CreateUserIdentifier, User, UserIdentifier}};
-use garde::Validate;
-use anyhow::{Result, anyhow};
-use argon2::{password_hash::{PasswordHasher, SaltString}, Argon2};
-use rand::rngs::OsRng;
-use crate::errors::password_hash::PasswordHashError;
 use crate::database::connection::get_db;
+use crate::errors::password_hash::PasswordHashError;
+use crate::errors::registration::RegistrationError;
+use crate::models::{
+    registration::FormData,
+    user::CreateUser
+};
+use anyhow::{Context, Result};
+use argon2::{
+    Argon2,
+    password_hash::{PasswordHasher, SaltString},
+};
+use garde::Validate;
+use rand::rngs::OsRng;
 
-pub async fn register(form: FormData) -> Result<()>{
+pub async fn register(form: FormData) -> Result<()> {
     let db = get_db();
-    form.validate()?;
+    form.validate()
+        .map_err(RegistrationError::InvalidData)
+        .with_context(|| "The form validation for registration failed")?;
     form.validate_uniqueness(&db).await?;
     let password_bytes = form.password.as_bytes();
     let salt = SaltString::generate(&mut OsRng);
     let argon2 = Argon2::default();
 
-    let password_hash = argon2.hash_password(password_bytes, &salt).map_err(PasswordHashError::from)?;
+    let password_hash = argon2
+        .hash_password(password_bytes, &salt)
+        .map_err(RegistrationError::from)?;
     let password_hash_str = password_hash.to_string();
 
     let user = CreateUser {
@@ -22,16 +33,28 @@ pub async fn register(form: FormData) -> Result<()>{
         password_hash: password_hash_str,
     };
 
-    let created_user: Option<User> = db.create("users").content(user).await?;
+    let identifier_data = form.identifier;
 
-    let created_user = created_user.ok_or_else(|| anyhow!("Failed to create user record"))?;
+    let surql = r#"
+            BEGIN TRANSACTION;
 
-    let user_identifier = CreateUserIdentifier {
-        identifier: form.identifier,
-        user_id: created_user.id,
-    };
+            LET $created_user = (CREATE users CONTENT $user_data)[0];
 
-    let _: Option<UserIdentifier> = db.create("user_identifier").content(user_identifier).await?;
+            CREATE user_identifier CONTENT {
+                user_id: $created_user.id,
+                identifier_type: $identifier_data.identifier_type,
+                identifier_value: $identifier_data.indentifier_value
+            };
+
+            COMMIT TRANSACTION; 
+        "#;
+
+        db.query(surql)
+            .bind(("user_data", user))
+            .bind(("identifier_data", identifier_data))
+            .await
+            .map_err(|e| RegistrationError::DatabaseError(Box::new(e)))
+            .with_context(|| "Failed to successfully create a user with their identifier, the database transaction failed")?;
 
     Ok(())
 }

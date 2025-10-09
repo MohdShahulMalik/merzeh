@@ -1,3 +1,3 @@
-pub mod password_hash;
-pub mod auth;
 pub mod session;
+pub mod registration;
+pub mod login;

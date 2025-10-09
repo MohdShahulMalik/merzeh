@@ -1,6 +1,6 @@
-use surrealdb::{Datetime, RecordId};
 use garde::Validate;
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
+use surrealdb::{Datetime, RecordId};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CreateUser {
@@ -38,15 +38,9 @@ pub struct CreateUserIdentifier {
 #[serde(tag = "identifier_type", content = "identifier_value")]
 pub enum Identifier {
     #[serde(rename = "email")]
-    Email(
-        #[garde(email)]
-        String
-    ),
+    Email(#[garde(email)] String),
     #[serde(rename = "mobile")]
-    Mobile(
-        #[garde(pattern(r"^[6-9][0-9]{9}$"))]
-        String
-    ),
+    Mobile(#[garde(pattern(r"^[6-9][0-9]{9}$"))] String),
 }
 
 #[derive(Debug, Serialize, Deserialize)]

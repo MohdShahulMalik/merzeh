@@ -1,9 +1,10 @@
-use anyhow::{anyhow, Result};
+use crate::errors::registration::RegistrationError;
+use crate::models::user::Identifier;
+use anyhow::{Result, anyhow};
 use garde::Validate;
 use serde::{Deserialize, Serialize};
-use surrealdb::engine::remote::ws::Client;
 use surrealdb::Surreal;
-use crate::models::user::Identifier;
+use surrealdb::engine::remote::ws::Client;
 
 #[derive(Debug, Validate, Deserialize, Serialize)]
 pub struct FormData {
@@ -12,7 +13,7 @@ pub struct FormData {
     #[garde(dive)]
     pub identifier: Identifier,
     #[garde(length(min = 8))]
-    pub password: String
+    pub password: String,
 }
 
 impl FormData {
@@ -27,14 +28,14 @@ impl FormData {
             .query(&query_str)
             .bind(("value", value))
             .await
-            .map_err(|e| anyhow!("Database error: {}", e))?;
+            .map_err(|e| RegistrationError::DatabaseError(Box::new(e)))?;
 
         let res: Vec<serde_json::Value> = result
             .take(0)
             .map_err(|_| anyhow!("Failed to parse query result"))?;
 
         if !res.is_empty() {
-            Err(anyhow!("{} already exists", field))
+            Err(RegistrationError::NotUniqueError(field.to_string()))?
         } else {
             Ok(())
         }
