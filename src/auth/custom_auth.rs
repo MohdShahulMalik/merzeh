@@ -1,5 +1,4 @@
 use crate::database::connection::get_db;
-use crate::errors::password_hash::PasswordHashError;
 use crate::errors::registration::RegistrationError;
 use crate::models::{
     registration::FormData,
@@ -13,7 +12,7 @@ use argon2::{
 use garde::Validate;
 use rand::rngs::OsRng;
 
-pub async fn register(form: FormData) -> Result<()> {
+pub async fn register_user(form: FormData) -> Result<()> {
     let db = get_db();
     form.validate()
         .map_err(RegistrationError::InvalidData)

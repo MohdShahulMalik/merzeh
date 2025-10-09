@@ -3,8 +3,10 @@ pub mod auth;
 pub mod database;
 pub mod errors;
 pub mod models;
-pub mod server_functions;
 pub mod utils;
+
+#[cfg(feature = "ssr")]
+pub mod server_functions;
 
 #[cfg(feature = "hydrate")]
 #[wasm_bindgen::prelude::wasm_bindgen]

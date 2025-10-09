@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 use surrealdb::Surreal;
 use surrealdb::engine::remote::ws::Client;
 
-#[derive(Debug, Validate, Deserialize, Serialize)]
+#[derive(Debug, Validate, Deserialize, Serialize, Clone)]
 pub struct FormData {
     #[garde(length(min = 2, max = 100))]
     pub name: String,

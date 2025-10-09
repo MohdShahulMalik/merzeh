@@ -34,7 +34,7 @@ pub struct CreateUserIdentifier {
     pub user_id: RecordId,
 }
 
-#[derive(Debug, Validate, Deserialize, Serialize)]
+#[derive(Debug, Validate, Deserialize, Serialize, Clone)]
 #[serde(tag = "identifier_type", content = "identifier_value")]
 pub enum Identifier {
     #[serde(rename = "email")]
