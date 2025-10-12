@@ -3,8 +3,7 @@ use crate::models::user::Identifier;
 use anyhow::{Result, anyhow};
 use garde::Validate;
 use serde::{Deserialize, Serialize};
-use surrealdb::Surreal;
-use surrealdb::engine::remote::ws::Client;
+use crate::database::connection::get_db;
 
 #[derive(Debug, Validate, Deserialize, Serialize, Clone)]
 pub struct FormData {
@@ -17,7 +16,9 @@ pub struct FormData {
 }
 
 impl FormData {
-    pub async fn validate_uniqueness(&self, db: &&'static Surreal<Client>) -> Result<()> {
+    pub async fn validate_uniqueness(&self) -> Result<()> {
+        let db = get_db();
+        
         let (field, value) = match &self.identifier {
             Identifier::Email(email) => ("email", email.to_string()),
             Identifier::Mobile(mobile) => ("mobile", mobile.to_string()),

@@ -1,5 +1,8 @@
+use actix_web::http::header::{HeaderValue, SET_COOKIE};
 use anyhow::{Context, Result};
 use chrono::{Duration, Utc};
+use leptos::prelude::expect_context;
+use leptos_actix::ResponseOptions;
 use surrealdb::RecordId;
 use surrealdb::sql::Datetime;
 
@@ -169,6 +172,27 @@ pub async fn cleanup_expired_sessions() -> Result<()> {
         .await
         .map_err(|e| SessionError::DatabaseError(Box::new(e)))
         .with_context(|| "Failed to deleted expired sessions")?;
+
+    Ok(())
+}
+
+pub fn set_session_cookie(
+    session_token: &str
+) -> Result<()> {
+    
+    let response = expect_context::<ResponseOptions>();
+
+    let cookie = format!(
+        "__Host-session={}; Path=/; Secure; HttpOnly; SameSite=Lax; Max-Age={}",
+        session_token,
+        SESSION_DURATION_IN_HOURS * 60 * 60
+    );
+
+    response.insert_header(
+        SET_COOKIE,
+        HeaderValue::from_str(&cookie)
+            .with_context(|| "Failed to set sesion headers")?
+    );
 
     Ok(())
 }

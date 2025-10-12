@@ -4,6 +4,7 @@ use surrealdb::{Datetime, RecordId};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CreateUser {
+    pub id: RecordId,
     pub display_name: String,
     pub password_hash: String,
 }

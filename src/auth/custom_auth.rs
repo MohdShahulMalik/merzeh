@@ -11,13 +11,16 @@ use argon2::{
 };
 use garde::Validate;
 use rand::rngs::OsRng;
+use surrealdb::{RecordId, Uuid};
 
-pub async fn register_user(form: FormData) -> Result<()> {
+pub async fn register_user(form: FormData) -> Result<RecordId> {
     let db = get_db();
+
     form.validate()
         .map_err(RegistrationError::InvalidData)
         .with_context(|| "The form validation for registration failed")?;
-    form.validate_uniqueness(&db).await?;
+    form.validate_uniqueness().await?;
+
     let password_bytes = form.password.as_bytes();
     let salt = SaltString::generate(&mut OsRng);
     let argon2 = Argon2::default();
@@ -27,7 +30,11 @@ pub async fn register_user(form: FormData) -> Result<()> {
         .map_err(RegistrationError::from)?;
     let password_hash_str = password_hash.to_string();
 
+    let unique_id = Uuid::new_v4().to_string();
+    let user_id = RecordId::from(("users", unique_id));
+
     let user = CreateUser {
+        id: user_id.clone(),
         display_name: form.name,
         password_hash: password_hash_str,
     };
@@ -55,5 +62,5 @@ pub async fn register_user(form: FormData) -> Result<()> {
             .map_err(|e| RegistrationError::DatabaseError(Box::new(e)))
             .with_context(|| "Failed to successfully create a user with their identifier, the database transaction failed")?;
 
-    Ok(())
+    Ok(user_id)
 }
