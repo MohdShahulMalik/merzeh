@@ -1,7 +1,7 @@
 use crate::database::connection::get_db;
 use crate::errors::registration::RegistrationError;
 use crate::models::{
-    registration::FormData,
+    auth::RegistrationFormData,
     user::CreateUser
 };
 use anyhow::{Context, Result};
@@ -13,7 +13,7 @@ use garde::Validate;
 use rand::rngs::OsRng;
 use surrealdb::{RecordId, Uuid};
 
-pub async fn register_user(form: FormData) -> Result<RecordId> {
+pub async fn register_user(form: RegistrationFormData) -> Result<RecordId> {
     let db = get_db();
 
     form.validate()

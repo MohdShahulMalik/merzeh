@@ -7,7 +7,7 @@ async fn main() -> std::io::Result<()> {
     use leptos::prelude::*;
     use leptos_actix::{LeptosRoutes, generate_route_list};
     use leptos_meta::MetaTags;
-    use merzeh::app::*;
+    use merzah::app::*;
 
     let conf = get_configuration(None).unwrap();
     let addr = conf.leptos_options.site_addr;
@@ -48,6 +48,7 @@ async fn main() -> std::io::Result<()> {
                 }
             })
             .app_data(web::Data::new(leptos_options.to_owned()))
+            .route("/api/{tail:.*}", leptos_actix::handle_server_fns())
         //.wrap(middleware::Compress::default())
     })
     .bind(&addr)?

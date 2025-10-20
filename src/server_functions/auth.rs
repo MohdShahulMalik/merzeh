@@ -1,5 +1,4 @@
 use actix_web::http::StatusCode;
-use anyhow::Context;
 use garde::Validate;
 use leptos::prelude::{expect_context, ServerFnError};
 use leptos::*;
@@ -7,10 +6,11 @@ use leptos_actix::ResponseOptions;
 use tracing::error;
 
 use crate::auth::session::{create_session, set_session_cookie};
-use crate::{auth::custom_auth::register_user, errors::registration::RegistrationError, models::{api_responses::ApiResponse, registration::FormData}};
+use crate::database::connection::get_db;
+use crate::{auth::custom_auth::register_user, models::{api_responses::ApiResponse, auth::{RegistrationFormData, LoginFormData}}};
 
-#[server(Register, "/auth")]
-pub async fn register(form: FormData) -> Result<ApiResponse<String>, ServerFnError>{
+#[server(Registration)]
+pub async fn register(form: RegistrationFormData) -> Result<ApiResponse<String>, ServerFnError>{
 
     let response_option = expect_context::<ResponseOptions>();
 
@@ -60,3 +60,13 @@ pub async fn register(form: FormData) -> Result<ApiResponse<String>, ServerFnErr
         error: None,
     })
 }
+
+/* pub async fn login(
+    form: LoginFormData,
+) {
+    let db = get_db();
+
+    let query = r#"
+        
+    "#;
+} */

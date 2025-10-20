@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 use crate::database::connection::get_db;
 
 #[derive(Debug, Validate, Deserialize, Serialize, Clone)]
-pub struct FormData {
+pub struct RegistrationFormData {
     #[garde(length(min = 2, max = 100))]
     pub name: String,
     #[garde(dive)]
@@ -15,7 +15,16 @@ pub struct FormData {
     pub password: String,
 }
 
-impl FormData {
+#[derive(Debug, Validate, Deserialize, Serialize, Clone)]
+pub struct LoginFormData {
+    #[garde(dive)]
+    pub identifier: Identifier,
+    #[garde(length(min = 8))]
+    pub password: String,
+}
+
+
+impl RegistrationFormData {
     pub async fn validate_uniqueness(&self) -> Result<()> {
         let db = get_db();
         

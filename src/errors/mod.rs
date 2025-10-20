@@ -1,4 +1,4 @@
+#[cfg(feature = "ssr")]
 pub mod session;
+#[cfg(feature = "ssr")]
 pub mod registration;
-pub mod login;
-pub mod app;

@@ -1,9 +1,13 @@
 pub mod app;
+#[cfg(feature = "ssr")]
 pub mod auth;
+#[cfg(feature = "ssr")]
 pub mod database;
 pub mod errors;
 pub mod models;
+#[cfg(feature = "ssr")]
 pub mod utils;
+pub mod pages;
 
 #[cfg(feature = "ssr")]
 pub mod server_functions;
