@@ -1,14 +1,17 @@
 use garde::Validate;
 use serde::{Deserialize, Serialize};
+
+#[cfg(feature = "ssr")]
 use surrealdb::{Datetime, RecordId};
 
+#[cfg(feature = "ssr")]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CreateUser {
-    pub id: RecordId,
     pub display_name: String,
     pub password_hash: String,
 }
 
+#[cfg(feature = "ssr")]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct User {
     pub id: RecordId,
@@ -19,6 +22,7 @@ pub struct User {
     pub updated_at: Datetime,
 }
 
+#[cfg(feature = "ssr")]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct UpdateUser {
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -28,6 +32,7 @@ pub struct UpdateUser {
     pub updated_at: Datetime,
 }
 
+#[cfg(feature = "ssr")]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CreateUserIdentifier {
     #[serde(flatten)]
@@ -41,9 +46,10 @@ pub enum Identifier {
     #[serde(rename = "email")]
     Email(#[garde(email)] String),
     #[serde(rename = "mobile")]
-    Mobile(#[garde(pattern(r"^[6-9][0-9]{9}$"))] String),
+    Mobile(#[garde(pattern(r"^[+]?[(]?[0-9]{1,4}[)]?[- .]?[(]?[0-9]{1,4}[)]?[- .]?[0-9]{4,10}$"))] String),
 }
 
+#[cfg(feature = "ssr")]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct UserIdentifier {
     #[serde(flatten)]

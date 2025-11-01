@@ -3,7 +3,10 @@ use leptos_meta::{Stylesheet, Title, provide_meta_context};
 use leptos_router::{
     StaticSegment, WildcardSegment,
     components::{Route, Router, Routes},
+    path,
 };
+
+use crate::pages::register::Register;
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -13,7 +16,7 @@ pub fn App() -> impl IntoView {
     view! {
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
-        <Stylesheet id="leptos" href="/pkg/merzeh.css"/>
+        <Stylesheet id="leptos" href="/pkg/merzah.css"/>
 
         // sets the document title
         <Title text="Welcome to Leptos"/>
@@ -23,6 +26,7 @@ pub fn App() -> impl IntoView {
             <main>
                 <Routes fallback=move || "Not found.">
                     <Route path=StaticSegment("") view=HomePage/>
+                    <Route path=path!("/auth") view=Register/>
                     <Route path=WildcardSegment("any") view=NotFound/>
                 </Routes>
             </main>
@@ -39,7 +43,7 @@ fn HomePage() -> impl IntoView {
 
     view! {
         <h1>"Welcome to Leptos!"</h1>
-        <button class = "text-blue-300 bg-amber-500" on:click=on_click>"Click Me: " {count}</button>
+        <button class = "text-white bg-blue-400" on:click=on_click>"Click Me: " {count}</button>
     }
 }
 

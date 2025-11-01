@@ -23,7 +23,7 @@ rand = { version = "~0.8.5", features = ["std_rng"], optional = true }
 serde = { version = "1.0.227", features = ["derive"] }
 tokio = { version = "1.47.1", features = ["macros", "rt-multi-thread"], optional = true }
 thiserror = {version = "2.0.16", optional = true}
-surrealdb = { version = "2.3.10", optional = true }
+surrealdb = { version = "2.3.10", optional = true, features = ["protocol-ws"] }
 once_cell = { version = "1.21.3", optional = true }
 dotenvy = { version = "0.15.7", optional = true }
 serde_json = { version = "1.0.145", optional = true }

@@ -9,7 +9,6 @@ pub mod models;
 pub mod utils;
 pub mod pages;
 
-#[cfg(feature = "ssr")]
 pub mod server_functions;
 
 #[cfg(feature = "hydrate")]

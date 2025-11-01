@@ -1,8 +1,12 @@
-use crate::errors::registration::RegistrationError;
 use crate::models::user::Identifier;
-use anyhow::{Result, anyhow};
 use garde::Validate;
 use serde::{Deserialize, Serialize};
+
+#[cfg(feature = "ssr")]
+use crate::errors::registration::RegistrationError;
+#[cfg(feature = "ssr")]
+use anyhow::{Result, anyhow};
+#[cfg(feature = "ssr")]
 use crate::database::connection::get_db;
 
 #[derive(Debug, Validate, Deserialize, Serialize, Clone)]
@@ -23,7 +27,7 @@ pub struct LoginFormData {
     pub password: String,
 }
 
-
+#[cfg(feature = "ssr")]
 impl RegistrationFormData {
     pub async fn validate_uniqueness(&self) -> Result<()> {
         let db = get_db();

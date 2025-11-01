@@ -1,15 +1,23 @@
+#[cfg(feature = "ssr")]
 use actix_web::http::StatusCode;
+#[cfg(feature = "ssr")]
 use garde::Validate;
-use leptos::prelude::{expect_context, ServerFnError};
+#[cfg(feature = "ssr")]
+use leptos::prelude::expect_context;
+use leptos::prelude::ServerFnError;
 use leptos::*;
+#[cfg(feature = "ssr")]
 use leptos_actix::ResponseOptions;
+#[cfg(feature = "ssr")]
 use tracing::error;
 
+#[cfg(feature = "ssr")]
 use crate::auth::session::{create_session, set_session_cookie};
-use crate::database::connection::get_db;
-use crate::{auth::custom_auth::register_user, models::{api_responses::ApiResponse, auth::{RegistrationFormData, LoginFormData}}};
+#[cfg(feature = "ssr")]
+use crate::auth::custom_auth::register_user;
+use crate::models::{api_responses::ApiResponse, auth::RegistrationFormData};
 
-#[server(Registration)]
+#[server(prefix = "/auth", endpoint = "register")]
 pub async fn register(form: RegistrationFormData) -> Result<ApiResponse<String>, ServerFnError>{
 
     let response_option = expect_context::<ResponseOptions>();
