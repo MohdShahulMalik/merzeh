@@ -8,6 +8,7 @@ pub mod models;
 #[cfg(feature = "ssr")]
 pub mod utils;
 pub mod pages;
+pub mod components;
 
 pub mod server_functions;
 

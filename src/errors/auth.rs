@@ -1,7 +1,7 @@
 use thiserror::Error;
 
 #[derive(Debug, Error)]
-pub enum RegistrationError {
+pub enum AuthError {
     #[error("The form data provided is invalid")]
     InvalidData(#[from] garde::Report),
 
@@ -12,12 +12,12 @@ pub enum RegistrationError {
     NotUniqueError(String),
 
     #[error("Failed to hash the password")]
-    PasswordHashError(argon2::password_hash::Error)
-}
+    PasswordHashError(argon2::password_hash::Error),
 
-impl From<argon2::password_hash::Error> for RegistrationError {
-    fn from(err: argon2::password_hash::Error) -> Self {
-        RegistrationError::PasswordHashError(err)
-    }
+    #[error("Password verification failed")]
+    PasswordVerificationError(argon2::password_hash::Error),
+
+    #[error("Requested user was not found")]
+    UserNotFound,
 }
 

@@ -3,7 +3,7 @@ use garde::Validate;
 use serde::{Deserialize, Serialize};
 
 #[cfg(feature = "ssr")]
-use crate::errors::registration::RegistrationError;
+use crate::errors::auth::AuthError;
 #[cfg(feature = "ssr")]
 use anyhow::{Result, anyhow};
 #[cfg(feature = "ssr")]
@@ -42,14 +42,14 @@ impl RegistrationFormData {
             .query(&query_str)
             .bind(("value", value))
             .await
-            .map_err(|e| RegistrationError::DatabaseError(Box::new(e)))?;
+            .map_err(|e| AuthError::DatabaseError(Box::new(e)))?;
 
         let res: Vec<serde_json::Value> = result
             .take(0)
             .map_err(|_| anyhow!("Failed to parse query result"))?;
 
         if !res.is_empty() {
-            Err(RegistrationError::NotUniqueError(field.to_string()))?
+            Err(AuthError::NotUniqueError(field.to_string()))?
         } else {
             Ok(())
         }

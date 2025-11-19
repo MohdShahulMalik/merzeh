@@ -1,7 +1,63 @@
 @import "tailwindcss";
 
-body {
-	font-family: sans-serif;
-	text-align: center;
-	content: center;
+/* body { */
+/* font-family: sans-serif; */
+/* text-align: center; */
+/* content: center; */
+/* } */
+
+@theme {
+  /* Surface colors (backgrounds) - 900 is darkest */
+  --color-surface-700: oklch(1 0.055 279); /* lightest (white) */
+  --color-surface-800: oklch(0.96 0.055 279); /* default background */
+  --color-surface-900: oklch(0.92 0.055 279); /* darkest background */
+
+  /* Foreground colors (text) */
+  --color-foreground-900: oklch(0.15 0.11 279); /* primary text */
+  --color-foreground-600: oklch(0.4 0.11 279); /* muted text */
+
+  /* Accent/Highlight */
+  --color-accent-50: oklch(1 0.11 279);
+
+  /* Border colors */
+  --color-stroke: oklch(0.6 0.11 279); /* default border (darker) */
+  --color-stroke-muted: oklch(0.7 0.11 279); /* subtle border (lighter) */
+
+  /* Semantic colors */
+  --color-primary: oklch(0.4 0.11 279);
+  --color-secondary: oklch(0.4 0.11 99);
+  --color-danger: oklch(0.5 0.11 30);
+  --color-warning: oklch(0.5 0.11 100);
+  --color-success: oklch(0.5 0.11 160);
+  --color-info: oklch(0.5 0.11 260);
+}
+
+@layer theme {
+  :root, :host {
+    @variant dark {
+      /* Surface colors (backgrounds) - 900 is darkest */
+      --color-surface-700: oklch(0.2 0.055 279);
+      --color-surface-800: oklch(0.15 0.055 279);
+      --color-surface-900: oklch(0.1 0.055 279);
+
+      /* Foreground colors (text) */
+      --color-foreground-900: oklch(0.96 0.1 279);
+      --color-foreground-600: oklch(0.76 0.1 279);
+
+      /* Accent/Highlight */
+      --color-accent-50: oklch(0.5 0.11 279);
+
+      /* Border colors */
+      --color-stroke: oklch(0.4 0.11 279);
+      --color-stroke-muted: oklch(0.3 0.11 279);
+
+      /* Semantic colors */
+      --color-primary: oklch(0.76 0.11 279);
+      --color-secondary: oklch(0.76 0.11 99);
+      --color-danger: oklch(0.7 0.11 30);
+      --color-warning: oklch(0.7 0.11 100);
+      --color-success: oklch(0.7 0.11 160);
+      --color-info: oklch(0.7 0.11 260);
+    }
+  }
 }

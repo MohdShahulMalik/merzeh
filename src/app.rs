@@ -6,7 +6,7 @@ use leptos_router::{
     path,
 };
 
-use crate::pages::register::Register;
+use crate::pages::{add_mosques_of_region::AddMosquesOfRegion, auth::{Login, Register}};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -26,7 +26,9 @@ pub fn App() -> impl IntoView {
             <main>
                 <Routes fallback=move || "Not found.">
                     <Route path=StaticSegment("") view=HomePage/>
-                    <Route path=path!("/auth") view=Register/>
+                    <Route path=path!("/register") view=Register/>
+                    <Route path=path!("/login") view=Login/>
+                    <Route path=path!("/add-mosques") view=AddMosquesOfRegion/>
                     <Route path=WildcardSegment("any") view=NotFound/>
                 </Routes>
             </main>
