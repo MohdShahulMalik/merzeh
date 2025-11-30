@@ -1,8 +1,12 @@
 use leptos::{prelude::ServerFnError, *};
+use crate::models::{api_responses::ApiResponse, mosque::{Mosque, MosquesResponse}};
+#[cfg(feature = "ssr")]
 use surrealdb::sql::Geometry;
+#[cfg(feature = "ssr")]
 use surrealdb::RecordId;
 
-use crate::{database::connection::get_db, models::{api_responses::ApiResponse, mosque::{Mosque, MosquesResponse}}};
+#[cfg(feature = "ssr")]
+use crate::database::connection::get_db;
 
 #[server(prefix = "/mosque", endpoint = "fetch-through-region")]
 pub async fn add_mosques_of_region(
@@ -67,7 +71,31 @@ pub async fn add_mosques_of_region(
         .await?;
 
     Ok(ApiResponse {
-        data: Some(format!("Added mosques for the region {} {} {} {}", south, west, north, east)),
+        data: Some(format!("Added mosques for the region {} {} {} {} successfully", south, west, north, east)),
+        error: None,
+    })
+}
+
+#[server(prefix = "/mosque", endpoint = "fetch-mosques-from-region")]
+pub async fn fetch_mosques_from_region(lat: f64, lon: f64) -> Result<ApiResponse<Vec<Mosque>>, ServerFnError> {
+    let db = get_db();
+    let point = Geometry::Point((lon, lat).into());
+    
+    let radius_in_meters = 10000;
+    let query = r#"
+        SELECT * FROM mosques
+        WHERE geo::distance(location, $point) < $radius
+        ORDER BY geo::distance(location, $point) ASC
+    "#;
+    let mut result = db.query(query)
+        .bind(("point", point))
+        .bind(("radius", radius_in_meters))
+        .await?;
+
+    let mosques: Vec<Mosque> = result.take(0)?;
+
+    Ok(ApiResponse {
+        data: Some(mosques),
         error: None,
     })
 }

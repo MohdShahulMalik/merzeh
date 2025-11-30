@@ -1,0 +1,6 @@
+[target.x86_64-unknown-linux-gnu]
+linker = "clang"
+rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+
+# Note: WASM linking uses 'lld' by default which is fine. 
+# mold speeds up the SERVER binary linking which runs every time you save.

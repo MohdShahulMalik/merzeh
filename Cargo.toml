@@ -15,7 +15,6 @@ leptos = { version = "0.8.9" }
 leptos_meta = { version = "0.8.5" }
 leptos_actix = { version = "0.8.6", optional = true }
 leptos_router = { version = "0.8.9" }
-wasm-bindgen = "=0.2.103"
 anyhow = { version = "1.0.100", optional = true }
 garde = {version = "0.22.0", features = ["derive", "regex", "email"]}
 argon2 = { version = "0.5.3", optional = true }
@@ -27,13 +26,25 @@ surrealdb = { version = "2.3.10", optional = true, features = ["protocol-ws"] }
 once_cell = { version = "1.21.3", optional = true }
 dotenvy = { version = "0.15.7", optional = true }
 serde_json = { version = "1.0.145", optional = true }
-chrono = { version = "0.4.42", optional = true }
+chrono = { version = "0.4.42", optional = true, features = ["serde"] }
 base64 = { version = "0.22.1", optional = true }
 tracing = { version = "0.1.41", features = ["log"], optional = true }
 tracing-subscriber = { version = "0.3.20", optional = true }
 tracing-appender = { version = "0.2.3", optional = true }
 reqwest = { version = "0.12.24", features = ["json"] }
 futures = "0.3.31"
+wasm-bindgen = "=0.2.105"
+wasm-bindgen-futures = "0.4.55"
+web-sys = { version = "0.3.82", features = [
+    "Window",
+    "Navigator",
+    "Geolocation",
+    "Position",
+    "PositionOptions",
+    "PositionError",
+    "Coordinates",
+] }
+leptos-leaflet = "0.10.2"
 
 [features]
 csr = ["leptos/csr"]

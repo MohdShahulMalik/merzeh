@@ -38,3 +38,9 @@ surreal_data/
 
 # Docker volumes
 *_data/
+
+# Aye Chat's config
+.aye/
+
+# Personal Notes
+NOTES.md

@@ -2,13 +2,8 @@ use garde::Validate;
 use leptos::{html, prelude::*, reactive::spawn_local};
 use leptos_router::components::A;
 
-use crate::{
-    models::{
-        auth::{LoginFormData, RegistrationFormData},
-        user::Identifier,
-    },
-    server_functions::auth::{login, register},
-};
+use crate::models::{auth::{LoginFormData, RegistrationFormData}, user::Identifier};
+use crate::server_functions::auth::{login, register};
 
 #[component]
 pub fn Register() -> impl IntoView {
@@ -176,7 +171,11 @@ pub fn Login() -> impl IntoView {
                     <img class = "w-auto h-16 rounded-full" src = "/assets/logo.png" />
 
                     <div class = "w-full">
-                        <img class = "w-auto h-12" src = "/assets/logo-text.png" />
+                        <picture>
+                          <source srcset="/assets/logo-text-dark.png" media="(prefers-color-scheme: dark)" />
+                          <source srcset="/assets/logo-text-light.png" media="(prefers-color-scheme: light)" />
+                          <img class = "w-auto h-12" src="/assets/logo-text-light.png" alt="Merzah logo" />
+                        </picture>
                         <span class = "text-foreground-600">Community Management App</span>
                     </div>
 
@@ -194,7 +193,7 @@ pub fn Login() -> impl IntoView {
 
             </section>
 
-            <section class = "flex-1">
+            <section class = "flex-1 bg-surface-700 h-[85svh]">
                 <form on:submit = on_submit>
                     <h1>"Login"</h1>
                     <h2>"Welcome back. please enter your details."</h2>

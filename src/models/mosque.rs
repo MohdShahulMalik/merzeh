@@ -1,11 +1,17 @@
 use serde::{Deserialize, Serialize};
+#[cfg(feature = "ssr")]
 use surrealdb::RecordId;
+#[cfg(feature = "ssr")]
 use surrealdb::sql::Geometry;
+#[cfg(feature = "ssr")]
+use chrono::NaiveTime;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Mosque {
+    #[cfg(feature = "ssr")]
     pub id: RecordId,
     pub name: String,
+    #[cfg(feature = "ssr")]
     pub location: Geometry,
     pub street: Option<String>,
     pub city: Option<String>,
@@ -40,4 +46,25 @@ pub struct Tags{
     pub street: Option<String>,
     #[serde(rename = "addr:city")]
     pub city: Option<String>,
+}
+
+#[cfg(feature = "ssr")]
+#[derive(Debug, Serialize, Deserialize)]
+pub struct PrayerTimes {
+    pub fajr: NaiveTime,
+    pub dhuhr: NaiveTime,
+    pub asr: NaiveTime,
+    pub maghrib: NaiveTime,
+    pub isha: NaiveTime,
+    pub jummah: NaiveTime,
+}
+
+#[cfg(feature = "ssr")]
+#[derive(Debug, Serialize, Deserialize)]
+pub struct MosqueDetails {
+    pub id: RecordId,
+    pub mosque: RecordId,
+    pub admins: Vec<RecordId>,
+    pub jamat_times: PrayerTimes,
+    pub adhan_time: PrayerTimes,
 }
