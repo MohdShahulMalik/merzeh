@@ -9,6 +9,9 @@ use crate::server_functions::auth::{login, register};
 pub fn Register() -> impl IntoView {
     let (error, set_error) = signal("".to_string());
     let (success, set_success) = signal("".to_string());
+    let (name_error, set_name_error) = signal(String::new());
+    let (password_error, set_password_error) = signal(String::new());
+    let (identifier_error, set_identifier_error) = signal(String::new());
 
     let name_input: NodeRef<html::Input> = NodeRef::new();
     let email_or_mobile_input: NodeRef<html::Input> = NodeRef::new();
@@ -16,6 +19,12 @@ pub fn Register() -> impl IntoView {
 
     let on_submit = move |ev: leptos::ev::SubmitEvent| {
         ev.prevent_default();
+
+        // Clear previous errors
+        set_name_error.set(String::new());
+        set_identifier_error.set(String::new());
+        set_password_error.set(String::new());
+        set_error.set(String::new());
 
         let name_value = name_input.get().expect("<input> should be mounted").value();
         let email_or_mobile_value = email_or_mobile_input
@@ -39,13 +48,20 @@ pub fn Register() -> impl IntoView {
             password: password_value,
         };
 
-        match registration_form.validate() {
-            Ok(_) => {}
+        if let Err(report) = registration_form.validate() {
+            for (field, error) in report.iter() {
+                let field_str = field.to_string();
+                let error_msg = error.to_string();
 
-            Err(report) => {
-                set_error.set(format!("Validation Error: {}", report));
-                return;
+                if field_str.starts_with("name") {
+                    set_name_error.set(error_msg);
+                } else if field_str.starts_with("identifier") {
+                    set_identifier_error.set(error_msg);
+                } else if field_str.starts_with("password") {
+                    set_password_error.set(error_msg);
+                }
             }
+            return;
         }
 
         spawn_local(async move {
@@ -74,7 +90,9 @@ pub fn Register() -> impl IntoView {
                     node_ref = name_input
                     required
                 />
-                <p>"Please enter your Name"</p>
+                <Show when = move || !name_error.get().is_empty()>
+                    <p>{name_error.get()}</p>
+                </Show>
             </div>
 
             <div class = "form-group">
@@ -86,7 +104,12 @@ pub fn Register() -> impl IntoView {
                     node_ref = email_or_mobile_input
                     required
                 />
-                <p>"Enter a valid password or mobile number"</p>
+                <Show when = move || !identifier_error.get().is_empty()>
+                    <p>{identifier_error.get()}</p>
+                </Show>
+                <Show when = move || identifier_error.get().is_empty()>
+                    <p>"Enter a valid email or mobile number"</p>
+                </Show>
             </div>
 
             <div class = "form-group">
@@ -97,7 +120,12 @@ pub fn Register() -> impl IntoView {
                     node_ref = password_input
                     required
                 />
-                <p>"Password must contain 8 characters"</p>
+                <Show when = move || !password_error.get().is_empty()>
+                    <p>{password_error.get()}</p>
+                </Show>
+                <Show when = move || password_error.get().is_empty()>
+                    <p>"Password must contain 8 characters"</p>
+                </Show>
             </div>
 
             <button
@@ -127,12 +155,19 @@ pub fn Register() -> impl IntoView {
 pub fn Login() -> impl IntoView {
     let (error, set_error) = signal("".to_string());
     let (success, set_success) = signal("".to_string());
+    let (identifier_error, set_identifier_error) = signal(String::new());
+    let (password_error, set_password_error) = signal(String::new());
 
     let email_or_mobile_input: NodeRef<html::Input> = NodeRef::new();
     let password_input: NodeRef<html::Input> = NodeRef::new();
 
     let on_submit = move |ev: leptos::ev::SubmitEvent| {
         ev.prevent_default();
+
+        // Clear previous errors
+        set_identifier_error.set(String::new());
+        set_password_error.set(String::new());
+        set_error.set(String::new());
 
         let email_or_mobile_value = email_or_mobile_input
             .get()
@@ -153,6 +188,20 @@ pub fn Login() -> impl IntoView {
             identifier,
             password: password_value,
         };
+
+        if let Err(report) = login_form.validate() {
+            for (field, error) in report.iter() {
+                let field_str = field.to_string();
+                let error_msg = error.to_string();
+
+                if field_str.starts_with("identifier") {
+                    set_identifier_error.set(error_msg);
+                } else if field_str.starts_with("password") {
+                    set_password_error.set(error_msg);
+                }
+            }
+            return;
+        }
 
         spawn_local(async move {
             match login(login_form).await {
@@ -198,7 +247,7 @@ pub fn Login() -> impl IntoView {
                     <h1>"Login"</h1>
                     <h2>"Welcome back. please enter your details."</h2>
 
-                    <div>
+                    <div class = "form-group">
                         <label for = "contact">"Email or Mobile"</label>
                         <input
                             type = "text"
@@ -207,6 +256,9 @@ pub fn Login() -> impl IntoView {
                             node_ref = email_or_mobile_input
                             required
                         />
+                        <Show when = move || !identifier_error.get().is_empty()>
+                            <p>{identifier_error.get()}</p>
+                        </Show>
                     </div>
 
                     <div class = "form-group">
@@ -217,16 +269,21 @@ pub fn Login() -> impl IntoView {
                             node_ref = password_input
                             required
                         />
-                        <div>
+                        <Show when = move || !password_error.get().is_empty()>
+                            <p>{password_error.get()}</p>
+                        </Show>
+                        <Show when = move || password_error.get().is_empty()>
                             <p>"Password must contain 8 characters"</p>
-                            <A href = "/forgot-password">"Forgot Password"</A>
-                        </div>
+                        </Show>
+                            <div>
+                                <A href = "/forgot-password">"Forgot Password"</A>
+                            </div>
                     </div>
 
 
                     <button
                         class = "border-2 bg-primary border-stroke cursor-pointer"
-                        type = "submit">Create Account
+                        type = "submit">Login
                     </button>
 
 
