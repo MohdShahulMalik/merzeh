@@ -44,3 +44,6 @@ surreal_data/
 
 # Personal Notes
 NOTES.md
+
+# Linker Config
+.cargo/

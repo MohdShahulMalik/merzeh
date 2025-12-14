@@ -62,7 +62,7 @@ impl SelectOption {
 }
 
 #[derive(Debug, Default)]
-pub struct FormConfig {
+pub struct InputConfig {
     // Core Fields
     pub name: String,
     pub label: String,
@@ -107,7 +107,7 @@ pub struct FormConfig {
     pub data_attributes: Option<HashMap<String, String>>,
 }
 
-impl FormConfig {
+impl InputConfig {
     pub fn text(name: impl Into<String>, label: impl Into<String>) -> Self {
         Self {
             name: name.into(),

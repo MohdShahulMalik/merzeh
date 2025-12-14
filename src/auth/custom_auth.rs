@@ -29,7 +29,7 @@ pub async fn register_user(form: RegistrationFormData) -> Result<RecordId> {
 
     let password_hash = argon2
         .hash_password(password_bytes, &salt)
-        .map_err(|e| AuthError::PasswordHashError(e))?;
+        .map_err(AuthError::PasswordHashError)?;
     let password_hash_str = password_hash.to_string();
 
     let user = CreateUser {

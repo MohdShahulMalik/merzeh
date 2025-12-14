@@ -151,6 +151,7 @@ pub fn Register() -> impl IntoView {
     }
 }
 
+// TO-DO: make the authenticat method in custom_auth.rs file use FETCH clause to retrieve the user's data in a single query only along with the user_details record
 #[component]
 pub fn Login() -> impl IntoView {
     let (error, set_error) = signal("".to_string());
@@ -258,6 +259,9 @@ pub fn Login() -> impl IntoView {
                         />
                         <Show when = move || !identifier_error.get().is_empty()>
                             <p>{identifier_error.get()}</p>
+                        </Show>
+                        <Show when = move || identifier_error.get().is_empty()>
+                            <p>"Enter a valid email or mobile number"</p>
                         </Show>
                     </div>
 
