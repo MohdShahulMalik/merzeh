@@ -20,3 +20,6 @@
 
 ## Intructions When Asked A Question
  - DON't go and just start changing or writting code in the codebase, use every other tool that the write tool and just answer the question properly!
+
+## THINGS TO NEVER DO
+ - NEVER EVER TRY TO ACCESS THE .env FILE AT ALL!! not through the read tool or by bash like using cat command or by any other means.
