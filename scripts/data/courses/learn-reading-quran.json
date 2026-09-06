@@ -1,7 +1,7 @@
 {
   "title": "Learn How to Read the Quran",
   "slug": "learn-reading-quran",
-  "description": "Learn to read the Quran from scratch using Noorani Qaida (\u0627\u0644\u0642\u0627\u0639\u062f\u0629 \u0627\u0644\u0646\u0648\u0631\u0627\u0646\u064a\u0629), the essential foundation before memorization (Hifz). This course covers the Arabic alphabet, vowels, tanween, sukoon, shaddah, and madd letters for proper Quran recitation.",
+  "description": "Learn to read the Quran from scratch using Noorani Qaida (القاعدة النورانية), the essential foundation before memorization (Hifz). This course covers the Arabic alphabet, vowels, tanween, sukoon, shaddah, and madd letters for proper Quran recitation.",
   "short_description": "Learn Quran reading with Noorani Qaida from scratch",
   "track_slug": "study-skills",
   "educator_id": "PLACEHOLDER",
@@ -12,7 +12,7 @@
   "modules": [
     {
       "title": "Arabic Alphabet & Basic Letters",
-      "description": "Introduction to Arabic alphabet (\u062d\u0631\u0648\u0641 \u0627\u0644\u0647\u062c\u0627\u0621) and basic letter recognition",
+      "description": "Introduction to Arabic alphabet (حروف الهجاء) and basic letter recognition",
       "sort_order": 1,
       "lessons": [
         {
@@ -75,7 +75,7 @@
     },
     {
       "title": "Joined Letters & Vowels",
-      "description": "Learning to join Arabic letters and understanding vowels (\u0627\u0644\u062d\u0631\u0643\u0627\u062a)",
+      "description": "Learning to join Arabic letters and understanding vowels (الحركات)",
       "sort_order": 2,
       "lessons": [
         {
@@ -123,7 +123,7 @@
         {
           "title": "Lesson 3: The Disjointed Letters",
           "content_type": "video",
-          "content": "The disjointed letters (\u0627\u0644\u062d\u0631\u0648\u0641 \u0627\u0644\u0645\u0642\u0637\u0639\u0629) found at the beginning of some Quran chapters",
+          "content": "The disjointed letters (الحروف المقطعة) found at the beginning of some Quran chapters",
           "video_url": "https://www.youtube.com/watch?v=SHUs-UPgH7E",
           "video_duration_seconds": 833,
           "audio_url": null,
@@ -138,7 +138,7 @@
     },
     {
       "title": "Vowels, Tanween & Sukoon",
-      "description": "Understanding Arabic vowels (\u0627\u0644\u062d\u0631\u0643\u0627\u062a), tanween (\u0627\u0644\u062a\u0646\u0648\u064a\u0646), and sukoon (\u0627\u0644\u0633\u0643\u0648\u0646)",
+      "description": "Understanding Arabic vowels (الحركات), tanween (التنوين), and sukoon (السكون)",
       "sort_order": 3,
       "lessons": [
         {
@@ -172,7 +172,7 @@
         {
           "title": "Lesson 5: Tanween",
           "content_type": "video",
-          "content": "Understanding Tanween (\u0627\u0644\u062a\u0646\u0648\u064a\u0646) - Fathatan, Kasratan, and Dammatan",
+          "content": "Understanding Tanween (التنوين) - Fathatan, Kasratan, and Dammatan",
           "video_url": "https://www.youtube.com/watch?v=74knNkAdC04",
           "video_duration_seconds": 205,
           "audio_url": null,
