@@ -41,7 +41,7 @@ use tracing::error;
 
 #[server(input = Json, output = Json, prefix = "/auth", endpoint = "register")]
 pub async fn register(form: RegistrationFormData) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, _user) = match get_authenticated_user::<String>().await {
+    let (response_options, db) = match get_server_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
