@@ -70,14 +70,16 @@ add_event() {
         -H "Content-Type: application/json" \
         -H "Authorization: Bearer $TOKEN" \
         -d "{
-            \"title\": \"$title\",
-            \"description\": \"$description\",
-            \"category\": \"$category\",
-            \"date\": \"$date\",
-            \"mosque\": \"$mosque_id\",
-            $speaker_field
-            \"recurrence_pattern\": null,
-            \"recurrence_duration\": null
+            \"create_event\": {
+                \"title\": \"$title\",
+                \"description\": \"$description\",
+                \"category\": \"$category\",
+                \"date\": \"$date\",
+                \"mosque\": \"$mosque_id\",
+                $speaker_field
+                \"recurrence_pattern\": null,
+                \"recurrence_duration\": null
+            }
         }")
 
     local http_code

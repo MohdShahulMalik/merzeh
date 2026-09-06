@@ -55,9 +55,11 @@ echo "===================================================="
 RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "$URL" \
     -H "Content-Type: application/json" \
     -d "{
-        \"identifier\": {\"identifier_type\": \"mobile\", \"identifier_value\": \"$MOBILE\"},
-        \"password\": \"$PASSWORD\",
-        \"platform\": \"mobile\"
+        \"form\": {
+            \"identifier\": {\"identifier_type\": \"mobile\", \"identifier_value\": \"$MOBILE\"},
+            \"password\": \"$PASSWORD\",
+            \"platform\": \"mobile\"
+        }
     }")
 
 HTTP_CODE=$(echo "$RESPONSE" | tail -n1)

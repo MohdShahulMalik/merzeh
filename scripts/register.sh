@@ -78,13 +78,16 @@ echo "  Password: $PASSWORD"
 echo "===================================================="
 
 # Use mobile identifier for mobile platform
+# Leptos server functions wrap params in an object keyed by the parameter name
 RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "$URL" \
     -H "Content-Type: application/json" \
     -d "{
-        \"name\": \"$USERNAME\",
-        \"identifier\": {\"identifier_type\": \"mobile\", \"identifier_value\": \"$MOBILE\"},
-        \"password\": \"$PASSWORD\",
-        \"platform\": \"mobile\"
+        \"form\": {
+            \"name\": \"$USERNAME\",
+            \"identifier\": {\"identifier_type\": \"mobile\", \"identifier_value\": \"$MOBILE\"},
+            \"password\": \"$PASSWORD\",
+            \"platform\": \"mobile\"
+        }
     }")
 
 HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
