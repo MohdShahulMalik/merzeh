@@ -1,7 +1,7 @@
 {
   "title": "Fiqh of Salah (Prayer)",
   "slug": "fiqh-of-salah",
-  "description": "Detailed study of the jurisprudence (fiqh \u0641\u0642\u0647) of Salah (\u0635\u0644\u0627\u0629) - the prayer - including its conditions (\u0634\u0631\u0627\u0626\u0637), pillars (\u0623\u0631\u0643\u0627\u0646), sunnahs (\u0633\u0646\u0646), and common mistakes. Learn the authentic rulings from the Qur'an and Sunnah.",
+  "description": "Detailed study of the jurisprudence (fiqh فقه) of Salah (صلاة) - the prayer - including its conditions (شرائط), pillars (أركان), sunnahs (سنن), and common mistakes. Learn the authentic rulings from the Qur'an and Sunnah.",
   "short_description": "Master the rulings and practice of the five daily prayers",
   "track_slug": "faith-worship",
   "educator_id": "PLACEHOLDER",
@@ -18,7 +18,7 @@
         {
           "title": "Rewards, Punishment & Perfect Timing",
           "content_type": "video",
-          "content": "The tremendous rewards of Salah (\u0635\u0644\u0627\u0629) and the warnings for missing it. Understanding the divine wisdom behind the specified prayer times (\u0623\u0648\u0642\u0627\u062a \u0627\u0644\u0635\u0644\u0627\u0629).",
+          "content": "The tremendous rewards of Salah (صلاة) and the warnings for missing it. Understanding the divine wisdom behind the specified prayer times (أوقات الصلاة).",
           "video_url": "https://www.youtube.com/watch?v=majed-mahmoud-salah-1",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -32,7 +32,7 @@
         {
           "title": "The Times of Prayer",
           "content_type": "video",
-          "content": "Detailed explanation of the five prayer times as taught by Jibreel (\u0639\u0644\u064a\u0647 \u0627\u0644\u0633\u0644\u0627\u0645) to the Prophet (\u0635\u0644\u0651 \u0627\u0644\u0644\u0647 \u0639\u0644\u064a\u0647 \u0648\u0633\u0644\u0651\u0645), including when each prayer begins and ends.",
+          "content": "Detailed explanation of the five prayer times as taught by Jibreel (عليه السلام) to the Prophet (صلّ الله عليه وسلّم), including when each prayer begins and ends.",
           "video_url": "https://www.youtube.com/watch?v=majed-mahmoud-salah-2",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -46,7 +46,7 @@
         {
           "title": "The Call to Prayer (Adhan)",
           "content_type": "video",
-          "content": "Understanding the Adhan (\u0623\u0630\u0627\u0646) - its virtues, rulings, and the meanings of its words.",
+          "content": "Understanding the Adhan (أذان) - its virtues, rulings, and the meanings of its words.",
           "video_url": "https://www.youtube.com/watch?v=majed-mahmoud-salah-3",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -67,7 +67,7 @@
         {
           "title": "Purification of Body, Clothing & Place",
           "content_type": "video",
-          "content": "The conditions of Taharah (\u0637\u0647\u0627\u0631\u0629) - purification - including Wudu (\u0648\u0636\u0648\u0621), Ghusl (\u063a\u0633\u0644), and ensuring one's clothing and prayer place are free from impurity.",
+          "content": "The conditions of Taharah (طهارة) - purification - including Wudu (وضوء), Ghusl (غسل), and ensuring one's clothing and prayer place are free from impurity.",
           "video_url": "https://www.youtube.com/watch?v=majed-mahmoud-salah-4",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -81,7 +81,7 @@
         {
           "title": "Facing the Qiblah & Awrah",
           "content_type": "video",
-          "content": "The ruling of facing the Qiblah (\u0642\u0628\u0644\u0629) - the direction of Masjid al-Haram - and the requirements of covering one's Awrah (\u0639\u0648\u0631\u0629).",
+          "content": "The ruling of facing the Qiblah (قبلة) - the direction of Masjid al-Haram - and the requirements of covering one's Awrah (عورة).",
           "video_url": "https://www.youtube.com/watch?v=majed-mahmoud-salah-5",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -95,7 +95,7 @@
         {
           "title": "The Intention (Niyyah)",
           "content_type": "video",
-          "content": "Understanding Niyyah (\u0646\u064a\u0629) - the intention - its place in the heart, and why it is a condition for every act of worship.",
+          "content": "Understanding Niyyah (نية) - the intention - its place in the heart, and why it is a condition for every act of worship.",
           "video_url": "https://www.youtube.com/watch?v=majed-mahmoud-salah-6",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -116,7 +116,7 @@
         {
           "title": "The Pillars (Arkan) of Salah",
           "content_type": "video",
-          "content": "The eight pillars of Salah (\u0623\u0631\u0643\u0627\u0646 \u0627\u0644\u0635\u0644\u0627\u0629): standing, Takbir, recitation, Ruku', Sujud, Jalsah, and the Tashahhud.",
+          "content": "The eight pillars of Salah (أركان الصلاة): standing, Takbir, recitation, Ruku', Sujud, Jalsah, and the Tashahhud.",
           "video_url": "https://www.youtube.com/watch?v=majed-mahmoud-salah-7",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -130,7 +130,7 @@
         {
           "title": "The Sunnah Acts of Salah",
           "content_type": "video",
-          "content": "The recommended actions (\u0633\u0646\u0646 \u0627\u0644\u0635\u0644\u0627\u0629) that complete and perfect the prayer, including raising hands, saying 'Ameen', and the Taslim.",
+          "content": "The recommended actions (سنن الصلاة) that complete and perfect the prayer, including raising hands, saying 'Ameen', and the Taslim.",
           "video_url": "https://www.youtube.com/watch?v=majed-mahmoud-salah-8",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -144,7 +144,7 @@
         {
           "title": "Common Mistakes in Salah",
           "content_type": "video",
-          "content": "Addressing common mistakes (\u0623\u062e\u0637\u0627\u0621 \u0634\u0627\u0626\u0639\u0629) in prayer that affect its validity or completeness, with solutions from the authentic Sunnah.",
+          "content": "Addressing common mistakes (أخطاء شائعة) in prayer that affect its validity or completeness, with solutions from the authentic Sunnah.",
           "video_url": "https://www.youtube.com/watch?v=majed-mahmoud-salah-9",
           "video_duration_seconds": null,
           "audio_url": null,
