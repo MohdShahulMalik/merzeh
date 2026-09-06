@@ -66,6 +66,7 @@ struct CourseWithEducator {
     pub short_description: String,
     pub level: CourseLevel,
     pub thumbnail_url: Option<String>,
+    pub video_url: Option<String>,
     pub duration_minutes: i32,
     pub lesson_count: i32,
     pub enrollment_count: i32,
@@ -167,7 +168,7 @@ pub async fn fetch_track_courses(
 
     let mut response = db
         .query(
-            "SELECT id, title, slug, description, short_description, level, thumbnail_url, duration_minutes, lesson_count, enrollment_count, educator FROM courses WHERE track = $track_id AND status = \"published\" AND deleted = false FETCH educator",
+            "SELECT id, title, slug, description, short_description, level, thumbnail_url, video_url, duration_minutes, lesson_count, enrollment_count, educator FROM courses WHERE track = $track_id AND status = \"published\" AND deleted = false FETCH educator",
         )
         .bind(("track_id", track_id))
         .await?;
@@ -182,6 +183,7 @@ pub async fn fetch_track_courses(
             short_description: course.short_description,
             level: course.level,
             thumbnail_url: course.thumbnail_url,
+            video_url: course.video_url,
             duration_minutes: course.duration_minutes,
             lesson_count: course.lesson_count,
             enrollment_count: course.enrollment_count,
@@ -270,6 +272,7 @@ pub async fn fetch_course_details(
         short_description: course.short_description,
         level: course.level,
         thumbnail_url: course.thumbnail_url,
+        video_url: course.video_url,
         duration_minutes: course.duration_minutes,
         lesson_count: course.lesson_count,
         enrollment_count: course.enrollment_count,
@@ -394,7 +397,7 @@ pub async fn search_courses(
 
     let mut response = db
         .query(
-            "SELECT id, title, slug, description, short_description, level, thumbnail_url, duration_minutes, lesson_count, enrollment_count, educator FROM courses WHERE status = \"published\" AND deleted = false FETCH educator",
+            "SELECT id, title, slug, description, short_description, level, thumbnail_url, video_url, duration_minutes, lesson_count, enrollment_count, educator FROM courses WHERE status = \"published\" AND deleted = false FETCH educator",
         )
         .await?;
     let courses: Vec<CourseWithEducator> = response.take(0)?;
@@ -418,6 +421,7 @@ pub async fn search_courses(
             short_description: course.short_description,
             level: course.level,
             thumbnail_url: course.thumbnail_url,
+            video_url: course.video_url,
             duration_minutes: course.duration_minutes,
             lesson_count: course.lesson_count,
             enrollment_count: course.enrollment_count,
@@ -741,6 +745,7 @@ pub async fn fetch_educator_courses() -> Result<ApiResponse<Vec<CourseOnClient>>
             short_description: course.short_description,
             level: course.level,
             thumbnail_url: course.thumbnail_url,
+            video_url: course.video_url,
             duration_minutes: course.duration_minutes,
             lesson_count: course.lesson_count,
             enrollment_count: course.enrollment_count,
@@ -792,6 +797,7 @@ pub async fn create_course(
         status: CourseStatus::Draft,
         language: create_course.language,
         thumbnail_url: create_course.thumbnail_url,
+        video_url: None,
         duration_minutes: 0,
         lesson_count: 0,
         enrollment_count: 0,
@@ -861,6 +867,7 @@ pub async fn update_course(
         status: update.status,
         language: update.language,
         thumbnail_url: update.thumbnail_url,
+        video_url: None,
         duration_minutes: update.duration_minutes,
         updated_at: Utc::now().into(),
     };
