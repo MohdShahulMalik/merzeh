@@ -1,7 +1,7 @@
 {
-  "title": "Al-Qaw\u0101'id al-Arba' (The Four Fundamental Principles)",
+  "title": "Al-Qawā'id al-Arba' (The Four Fundamental Principles)",
   "slug": "qawaid-al-arba",
-  "description": "Study the four fundamental principles of Islam (\u0627\u0644\u0642\u0648\u0627\u0639\u062f \u0627\u0644\u0623\u0631\u0628\u0639) by Imam Muhammad ibn Abdul-Wahhab, a foundational text in Salafi methodology. Learn the four questions every person must know about their religion, with lessons from the Salafi Arabic Reading Program.",
+  "description": "Study the four fundamental principles of Islam (القواعد الأربع) by Imam Muhammad ibn Abdul-Wahhab, a foundational text in Salafi methodology. Learn the four questions every person must know about their religion, with lessons from the Salafi Arabic Reading Program.",
   "short_description": "Learn the four fundamental principles of Islam by Imam Muhammad ibn Abdul-Wahhab",
   "track_slug": "study-skills",
   "educator_id": "PLACEHOLDER",
@@ -11,14 +11,14 @@
   "video_url": "https://www.youtube.com/playlist?list=PLyo54InWsoTZ5Vw3KxzNGbeF3C1ICxnUq",
   "modules": [
     {
-      "title": "Text of Al-Qaw\u0101'id al-Arba'",
+      "title": "Text of Al-Qawā'id al-Arba'",
       "description": "Reading and understanding the original Arabic text of the Four Fundamental Principles",
       "sort_order": 1,
       "lessons": [
         {
           "title": "Lesson 1 - Introduction & First Principle",
           "content_type": "video",
-          "content": "Introduction to Al-Qaw\u0101'id al-Arba' and the first principle: Knowing Allah (\u0645\u0639\u0631\u0641\u062a\u0647 \u0633\u0628\u062d\u0627\u0646\u0647)",
+          "content": "Introduction to Al-Qawā'id al-Arba' and the first principle: Knowing Allah (معرفته سبحانه)",
           "video_url": "https://www.youtube.com/playlist?list=PLyo54InWsoTZ5Vw3KxzNGbeF3C1ICxnUq",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -32,7 +32,7 @@
         {
           "title": "Lesson 2 - Second Principle",
           "content_type": "video",
-          "content": "The second principle: Knowing one's religion (\u0645\u0639\u0631\u0641\u0629 \u062f\u064a\u0646\u0647)",
+          "content": "The second principle: Knowing one's religion (معرفة دينه)",
           "video_url": "https://www.youtube.com/playlist?list=PLyo54InWsoTZ5Vw3KxzNGbeF3C1ICxnUq",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "title": "Explanation of Al-Qaw\u0101'id al-Arba'",
+      "title": "Explanation of Al-Qawā'id al-Arba'",
       "description": "Detailed explanation of the Four Fundamental Principles",
       "sort_order": 2,
       "lessons": [

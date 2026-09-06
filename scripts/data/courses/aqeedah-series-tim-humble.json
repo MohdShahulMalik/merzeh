@@ -1,7 +1,7 @@
 {
   "title": "Aqeedah Series by Ustadh Tim Humble",
   "slug": "aqeedah-series-tim-humble",
-  "description": "A comprehensive series on Islamic creed (Aqeedah \u0639\u0642\u064a\u062f\u0629) covering the six articles of faith, the pillars of Islam, and the foundations of the Salafi methodology. Taught by Ustadh Muhammad Tim Humble with clear explanations based on the understanding of the Salaf.",
+  "description": "A comprehensive series on Islamic creed (Aqeedah عقيدة) covering the six articles of faith, the pillars of Islam, and the foundations of the Salafi methodology. Taught by Ustadh Muhammad Tim Humble with clear explanations based on the understanding of the Salaf.",
   "short_description": "Comprehensive Aqeedah course based on the understanding of the Salaf",
   "track_slug": "faith-worship",
   "educator_id": "PLACEHOLDER",
@@ -18,7 +18,7 @@
         {
           "title": "What is Aqeedah?",
           "content_type": "video",
-          "content": "An introduction to the science of Aqeedah (\u0639\u0642\u064a\u062f\u0629) - its meaning, importance, and why every Muslim must have knowledge of correct Islamic belief.",
+          "content": "An introduction to the science of Aqeedah (عقيدة) - its meaning, importance, and why every Muslim must have knowledge of correct Islamic belief.",
           "video_url": "https://www.youtube.com/watch?v=9TaejtPCHuY",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -32,7 +32,7 @@
         {
           "title": "Belief in Allah",
           "content_type": "video",
-          "content": "Understanding the first article of faith: belief in Allah (\u0627\u0644\u0625\u064a\u0645\u0627\u0646 \u0628\u0627\u0644\u0644\u0647) - His lordship, names, attributes, and right to be worshipped alone.",
+          "content": "Understanding the first article of faith: belief in Allah (الإيمان بالله) - His lordship, names, attributes, and right to be worshipped alone.",
           "video_url": "https://www.youtube.com/watch?v=9TaejtPCHuY",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -46,7 +46,7 @@
         {
           "title": "Belief in the Angels",
           "content_type": "video",
-          "content": "Understanding the second article of faith: belief in the angels (\u0627\u0644\u0625\u064a\u0645\u0627\u0646 \u0628\u0627\u0644\u0645\u0644\u0627\u0626\u0643\u0629) - their nature, functions, and hierarchy.",
+          "content": "Understanding the second article of faith: belief in the angels (الإيمان بالملائكة) - their nature, functions, and hierarchy.",
           "video_url": "https://www.youtube.com/watch?v=9TaejtPCHuY",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -60,7 +60,7 @@
         {
           "title": "Belief in the Divine Books",
           "content_type": "video",
-          "content": "Understanding the third article of faith: belief in the divine books (\u0627\u0644\u0625\u064a\u0645\u0627\u0646 \u0628\u0627\u0644\u0643\u062a\u0628) - their revelation, preservation, and the abrogation of previous scriptures.",
+          "content": "Understanding the third article of faith: belief in the divine books (الإيمان بالكتب) - their revelation, preservation, and the abrogation of previous scriptures.",
           "video_url": "https://www.youtube.com/watch?v=9TaejtPCHuY",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -81,7 +81,7 @@
         {
           "title": "Belief in the Messengers",
           "content_type": "video",
-          "content": "Understanding the fourth article of faith: belief in the prophets and messengers (\u0627\u0644\u0625\u064a\u0645\u0627\u0646 \u0628\u0627\u0644\u0631\u0633\u0644) - their mission, characteristics, and the finality of Prophet Muhammad (\u0635\u0644\u0651 \u0627\u0644\u0644\u0647 \u0639\u0644\u064a\u0647 \u0648\u0633\u0644\u0651\u0645).",
+          "content": "Understanding the fourth article of faith: belief in the prophets and messengers (الإيمان بالرسل) - their mission, characteristics, and the finality of Prophet Muhammad (صلّ الله عليه وسلّم).",
           "video_url": "https://www.youtube.com/watch?v=9TaejtPCHuY",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -95,7 +95,7 @@
         {
           "title": "Belief in the Last Day",
           "content_type": "video",
-          "content": "Understanding the fifth article of faith: belief in the Day of Judgment (\u0627\u0644\u0625\u064a\u0645\u0627\u0646 \u0628\u064a\u0648\u0645 \u0627\u0644\u0622\u062e\u0631) - its events, signs, and what awaits mankind.",
+          "content": "Understanding the fifth article of faith: belief in the Day of Judgment (الإيمان بيوم الآخر) - its events, signs, and what awaits mankind.",
           "video_url": "https://www.youtube.com/watch?v=9TaejtPCHuY",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -109,7 +109,7 @@
         {
           "title": "Belief in Divine Decree",
           "content_type": "video",
-          "content": "Understanding the sixth article of faith: belief in Al-Qadr (\u0627\u0644\u0625\u064a\u0645\u0627\u0646 \u0628\u0627\u0644\u0642\u0636\u0627\u0621 \u0648\u0627\u0644\u0642\u062f\u0631) - divine decree, predestination, and free will.",
+          "content": "Understanding the sixth article of faith: belief in Al-Qadr (الإيمان بالقضاء والقدر) - divine decree, predestination, and free will.",
           "video_url": "https://www.youtube.com/watch?v=9TaejtPCHuY",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -123,7 +123,7 @@
         {
           "title": "The Pillars of Islam",
           "content_type": "video",
-          "content": "Understanding the five pillars of Islam (\u0623\u0631\u0643\u0627\u0646 \u0627\u0644\u0625\u0633\u0644\u0627\u0645) and their connection to correct Aqeedah.",
+          "content": "Understanding the five pillars of Islam (أركان الإسلام) and their connection to correct Aqeedah.",
           "video_url": "https://www.youtube.com/watch?v=9TaejtPCHuY",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -144,7 +144,7 @@
         {
           "title": "Who are the Salaf?",
           "content_type": "video",
-          "content": "Understanding the term Salaf (\u0627\u0644\u0633\u0644\u0641) - the righteous predecessors - and why their methodology is the criterion for correctness.",
+          "content": "Understanding the term Salaf (السلف) - the righteous predecessors - and why their methodology is the criterion for correctness.",
           "video_url": "https://www.youtube.com/watch?v=9TaejtPCHuY",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -158,7 +158,7 @@
         {
           "title": "Avoiding Innovation (Bid'ah)",
           "content_type": "video",
-          "content": "Understanding the danger of Bid'ah (\u0628\u062f\u0639\u0629) - religious innovation - and how to guard the religion from fabricated practices.",
+          "content": "Understanding the danger of Bid'ah (بدعة) - religious innovation - and how to guard the religion from fabricated practices.",
           "video_url": "https://www.youtube.com/watch?v=9TaejtPCHuY",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -172,7 +172,7 @@
         {
           "title": "Following the Sunnah",
           "content_type": "video",
-          "content": "The importance of adhering to the Sunnah (\u0627\u0644\u0633\u0646\u0629) of the Prophet (\u0635\u0644\u0651 \u0627\u0644\u0644\u0647 \u0639\u0644\u064a\u0647 \u0648\u0633\u0644\u0651\u0645) in matters of worship and daily life.",
+          "content": "The importance of adhering to the Sunnah (السنة) of the Prophet (صلّ الله عليه وسلّم) in matters of worship and daily life.",
           "video_url": "https://www.youtube.com/watch?v=9TaejtPCHuY",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -186,7 +186,7 @@
         {
           "title": "The Saved Sect",
           "content_type": "video",
-          "content": "Understanding the prophetic description of the saved sect (\u0627\u0644\u0641\u0631\u0642\u0629 \u0627\u0644\u0646\u0627\u062c\u064a\u0629) and how to be upon the correct methodology.",
+          "content": "Understanding the prophetic description of the saved sect (الفرقة الناجية) and how to be upon the correct methodology.",
           "video_url": "https://www.youtube.com/watch?v=9TaejtPCHuY",
           "video_duration_seconds": null,
           "audio_url": null,

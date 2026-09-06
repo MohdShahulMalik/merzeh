@@ -1,7 +1,7 @@
 {
-  "title": "Thal\u0101that-ul-Us\u016bl (The Three Fundamental Principles)",
+  "title": "Thalāthat-ul-Usūl (The Three Fundamental Principles)",
   "slug": "thalathat-ul-usul",
-  "description": "Study the three fundamental principles of Islam (\u0627\u0644\u062b\u0644\u0627\u062b\u0629 \u0627\u0644\u0623\u0635\u0648\u0644) by Imam Muhammad ibn Abdul-Wahhab - the purpose of life, knowledge of the religion, and evidence for the religion. This foundational text covers the three questions every person will be asked in the grave, with lessons from the Salafi Arabic Reading Program.",
+  "description": "Study the three fundamental principles of Islam (الثلاثة الأصول) by Imam Muhammad ibn Abdul-Wahhab - the purpose of life, knowledge of the religion, and evidence for the religion. This foundational text covers the three questions every person will be asked in the grave, with lessons from the Salafi Arabic Reading Program.",
   "short_description": "Learn the three fundamental principles of Islam by Imam Muhammad ibn Abdul-Wahhab",
   "track_slug": "study-skills",
   "educator_id": "PLACEHOLDER",
@@ -11,14 +11,14 @@
   "video_url": "https://www.youtube.com/playlist?list=PLyo54InWsoTYk2yr2fWpbMHtS7cZOBn05",
   "modules": [
     {
-      "title": "Text of Thal\u0101that-ul-Us\u016bl",
+      "title": "Text of Thalāthat-ul-Usūl",
       "description": "Reading and understanding the original Arabic text of the Three Fundamental Principles",
       "sort_order": 1,
       "lessons": [
         {
           "title": "Lesson 1 - Introduction",
           "content_type": "video",
-          "content": "Introduction to Thal\u0101that-ul-Us\u016bl and its importance in Islamic study",
+          "content": "Introduction to Thalāthat-ul-Usūl and its importance in Islamic study",
           "video_url": "https://www.youtube.com/playlist?list=PLyo54InWsoTYk2yr2fWpbMHtS7cZOBn05",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -32,7 +32,7 @@
         {
           "title": "Lesson 2 - The First Principle",
           "content_type": "video",
-          "content": "The first principle: Knowing Allah (\u0645\u0639\u0631\u0641\u0629 \u0627\u0644\u0644\u0647 \u062a\u0639\u0627\u0644\u0649) - His Lordship, Names and Attributes",
+          "content": "The first principle: Knowing Allah (معرفة الله تعالى) - His Lordship, Names and Attributes",
           "video_url": "https://www.youtube.com/playlist?list=PLyo54InWsoTYk2yr2fWpbMHtS7cZOBn05",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -46,7 +46,7 @@
         {
           "title": "Lesson 3 - The Second Principle",
           "content_type": "video",
-          "content": "The second principle: Knowing one's religion (\u0645\u0639\u0631\u0641\u0629 \u0627\u0644\u062f\u064a\u0646) - Islam, Iman, and Ihsan",
+          "content": "The second principle: Knowing one's religion (معرفة الدين) - Islam, Iman, and Ihsan",
           "video_url": "https://www.youtube.com/playlist?list=PLyo54InWsoTYk2yr2fWpbMHtS7cZOBn05",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "title": "Explanation of Thal\u0101that-ul-Us\u016bl",
+      "title": "Explanation of Thalāthat-ul-Usūl",
       "description": "Detailed explanation of the Three Fundamental Principles",
       "sort_order": 2,
       "lessons": [

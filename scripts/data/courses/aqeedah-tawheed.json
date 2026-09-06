@@ -1,7 +1,7 @@
 {
   "title": "Aqeedah: The Foundation of Tawheed",
   "slug": "aqeedah-tawheed",
-  "description": "Comprehensive study of Islamic creed (Aqeedah \u0639\u0642\u064a\u062f\u0629) focusing on Tawhid (\u062a\u0648\u062d\u064a\u062f) - monotheism - as taught by the Salaf. This course covers the three categories of Tawheed, the names and attributes of Allah, and the foundations of correct Islamic belief.",
+  "description": "Comprehensive study of Islamic creed (Aqeedah عقيدة) focusing on Tawhid (توحيد) - monotheism - as taught by the Salaf. This course covers the three categories of Tawheed, the names and attributes of Allah, and the foundations of correct Islamic belief.",
   "short_description": "Master the fundamentals of Islamic creed and Tawheed",
   "track_slug": "faith-worship",
   "educator_id": "PLACEHOLDER",
@@ -18,7 +18,7 @@
         {
           "title": "What is Aqeedah?",
           "content_type": "video",
-          "content": "Understanding the meaning of Aqeedah (\u0639\u0642\u064a\u062f\u0629) - Islamic creed - and why it is the foundation upon which all acts of worship are built.",
+          "content": "Understanding the meaning of Aqeedah (عقيدة) - Islamic creed - and why it is the foundation upon which all acts of worship are built.",
           "video_url": "https://www.youtube.com/watch?v=jxGFIz-RESc",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -32,7 +32,7 @@
         {
           "title": "The Three Categories of Tawheed",
           "content_type": "video",
-          "content": "Understanding the division of Tawheed (\u062a\u0648\u062d\u064a\u062f) into three categories: Tawheed ar-Rububiyyah, Tawheed al-Uluhiyyah, and Tawheed al-Asma wa's-Sifat.",
+          "content": "Understanding the division of Tawheed (توحيد) into three categories: Tawheed ar-Rububiyyah, Tawheed al-Uluhiyyah, and Tawheed al-Asma wa's-Sifat.",
           "video_url": "https://www.youtube.com/watch?v=jxGFIz-RESc",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -46,7 +46,7 @@
         {
           "title": "Tawheed ar-Rububiyyah",
           "content_type": "video",
-          "content": "Understanding Allah's Lordship (\u0631\u0628\u0648\u0628\u064a\u0629) - His creation, sovereignty, and control over all affairs.",
+          "content": "Understanding Allah's Lordship (ربوبية) - His creation, sovereignty, and control over all affairs.",
           "video_url": "https://www.youtube.com/watch?v=jxGFIz-RESc",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -67,7 +67,7 @@
         {
           "title": "Tawheed al-Uluhiyyah",
           "content_type": "video",
-          "content": "Understanding the unity of worship (\u0625\u0644\u0648\u0647\u064a\u0629) - directing all forms of worship exclusively to Allah alone.",
+          "content": "Understanding the unity of worship (إلوهية) - directing all forms of worship exclusively to Allah alone.",
           "video_url": "https://www.youtube.com/watch?v=jxGFIz-RESc",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -81,7 +81,7 @@
         {
           "title": "The Types of Shirk",
           "content_type": "video",
-          "content": "Understanding Shirk (\u0634\u0631\u0643) - polytheism - in its major and minor forms, and how to guard against it.",
+          "content": "Understanding Shirk (شرك) - polytheism - in its major and minor forms, and how to guard against it.",
           "video_url": "https://www.youtube.com/watch?v=jxGFIz-RESc",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -95,7 +95,7 @@
         {
           "title": "Du'a and Supplication",
           "content_type": "video",
-          "content": "The central role of Du'a (\u062f\u0639\u0627\u0621) in worship and why supplication is the essence of the religion.",
+          "content": "The central role of Du'a (دعاء) in worship and why supplication is the essence of the religion.",
           "video_url": "https://www.youtube.com/watch?v=jxGFIz-RESc",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -116,7 +116,7 @@
         {
           "title": "Affirming Allah's Names",
           "content_type": "video",
-          "content": "Understanding and affirming the beautiful names of Allah (\u0623\u0633\u0645\u0627\u0621 \u0627\u0644\u0644\u0647 \u0627\u0644\u062d\u0633\u0646\u0649) as mentioned in the Qur'an and Sunnah.",
+          "content": "Understanding and affirming the beautiful names of Allah (أسماء الله الحسنى) as mentioned in the Qur'an and Sunnah.",
           "video_url": "https://www.youtube.com/watch?v=jxGFIz-RESc",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -130,7 +130,7 @@
         {
           "title": "Allah's Attributes Without Tahrif",
           "content_type": "video",
-          "content": "Affirming Allah's attributes (\u0635\u0641\u0627\u062a) without distortion (\u062a\u062d\u0631\u064a\u0641), nullification (\u0646\u0641\u064a), or asking 'how' (\u0643\u064a\u0641\u064a\u0629).",
+          "content": "Affirming Allah's attributes (صفات) without distortion (تحريف), nullification (نفي), or asking 'how' (كيفية).",
           "video_url": "https://www.youtube.com/watch?v=jxGFIz-RESc",
           "video_duration_seconds": null,
           "audio_url": null,

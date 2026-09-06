@@ -1,7 +1,7 @@
 {
-  "title": "Naw\u0101qid-ul-Isl\u0101m (Nullifiers of Islam)",
+  "title": "Nawāqid-ul-Islām (Nullifiers of Islam)",
   "slug": "nawaid-ul-islam",
-  "description": "Study the ten nullifiers of Islam (\u0646\u0648\u0627\u0642\u0636 \u0627\u0644\u0625\u0633\u0644\u0627\u0645) - actions that take a person out of the fold of Islam. This course covers the text and explanation of this important treatise by Imam Muhammad ibn Abdul-Wahhab, with lessons from the Salafi Arabic Reading Program.",
+  "description": "Study the ten nullifiers of Islam (نواقض الإسلام) - actions that take a person out of the fold of Islam. This course covers the text and explanation of this important treatise by Imam Muhammad ibn Abdul-Wahhab, with lessons from the Salafi Arabic Reading Program.",
   "short_description": "Study the ten nullifiers of Islam that take a person out of the fold",
   "track_slug": "study-skills",
   "educator_id": "PLACEHOLDER",
@@ -11,14 +11,14 @@
   "video_url": "https://www.youtube.com/playlist?list=PLyo54InWsoTbKDQ9WwiK4F2l5e2j4jc0-",
   "modules": [
     {
-      "title": "Text of Naw\u0101qid-ul-Isl\u0101m",
-      "description": "Reading and understanding the original Arabic text of Naw\u0101qid-ul-Isl\u0101m",
+      "title": "Text of Nawāqid-ul-Islām",
+      "description": "Reading and understanding the original Arabic text of Nawāqid-ul-Islām",
       "sort_order": 1,
       "lessons": [
         {
           "title": "Lesson 1 - Introduction & First Nullifier",
           "content_type": "video",
-          "content": "Introduction to Naw\u0101qid-ul-Isl\u0101m and the first nullifier: Shirk (\u0627\u0644\u0634\u0631\u0643 \u0628\u0627\u0644\u0644\u0647)",
+          "content": "Introduction to Nawāqid-ul-Islām and the first nullifier: Shirk (الشرك بالله)",
           "video_url": "https://www.youtube.com/playlist?list=PLyo54InWsoTbKDQ9WwiK4F2l5e2j4jc0-",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -32,7 +32,7 @@
         {
           "title": "Lesson 2 - Second & Third Nullifiers",
           "content_type": "video",
-          "content": "The second nullifier: Killing a soul and the third nullifier: Sorcery (\u0627\u0644\u0633\u062d\u0631)",
+          "content": "The second nullifier: Killing a soul and the third nullifier: Sorcery (السحر)",
           "video_url": "https://www.youtube.com/playlist?list=PLyo54InWsoTbKDQ9WwiK4F2l5e2j4jc0-",
           "video_duration_seconds": null,
           "audio_url": null,
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "title": "Explanation of Naw\u0101qid-ul-Isl\u0101m",
+      "title": "Explanation of Nawāqid-ul-Islām",
       "description": "Detailed explanation of the ten nullifiers by Shaykh Abdul-Muhsin al-Qasim",
       "sort_order": 2,
       "lessons": [
