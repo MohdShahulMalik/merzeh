@@ -26,13 +26,13 @@ use crate::models::{
 #[cfg(feature = "ssr")]
 use crate::utils::parsing::parse_record_id;
 #[cfg(feature = "ssr")]
-use crate::utils::ssr::{ServerResponse, get_authenticated_user};
+use crate::utils::ssr::{ServerResponse, get_authenticated_user_and_context};
 #[cfg(feature = "ssr")]
 use crate::utils::user_elevation::is_mosque_admin;
 
 #[server(input = Json, output = Json, prefix = "/mosques/events", endpoint = "add-event")]
 pub async fn add_event(create_event: CreateEvent) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(error) => return Ok(error),
     };
@@ -94,7 +94,7 @@ pub async fn update_event(
     event_id: String,
     updated_event: UpdatedEvent,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, _user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, _user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(err) => return Ok(err),
     };
@@ -181,7 +181,7 @@ pub async fn fetch_users_favorite_mosques_events(
     lat: f64,
     lon: f64,
 ) -> Result<ApiResponse<Vec<PersonalEvent>>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<Vec<PersonalEvent>>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<Vec<PersonalEvent>>().await {
         Ok(ctx) => ctx,
         Err(err) => return Ok(err),
     };
@@ -298,7 +298,7 @@ pub async fn fetch_users_favorite_mosques_events(
 pub async fn fetch_mosque_events(
     mosque_id: String,
 ) -> Result<ApiResponse<FetchedEvents>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<FetchedEvents>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<FetchedEvents>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -379,7 +379,7 @@ pub async fn fetch_mosque_events(
 pub async fn delete_event(event_id: String) -> Result<ApiResponse<String>, ServerFnError> {
     tracing::info!(?event_id, "delete_event called with event_id");
 
-    let (response_options, db, _user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, _user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(err) => return Ok(err),
     };
