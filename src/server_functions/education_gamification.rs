@@ -15,7 +15,7 @@ use crate::models::gamification::{
 #[cfg(feature = "ssr")]
 use crate::models::user::User;
 #[cfg(feature = "ssr")]
-use crate::utils::ssr::{ServerResponse, get_authenticated_user};
+use crate::utils::ssr::{ServerResponse, get_authenticated_user_and_context};
 
 #[cfg(feature = "ssr")]
 fn datetime_to_fixed(datetime: Datetime) -> DateTime<FixedOffset> {
@@ -40,7 +40,7 @@ struct UserStreakWithUser {
 
 #[server(input = Json, output = Json, prefix = "/education", endpoint = "streak")]
 pub async fn fetch_streak() -> Result<ApiResponse<UserStreakOnClient>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<UserStreakOnClient>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<UserStreakOnClient>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -64,7 +64,7 @@ pub async fn fetch_streak() -> Result<ApiResponse<UserStreakOnClient>, ServerFnE
 #[server(input = Json, output = Json, prefix = "/education", endpoint = "achievements")]
 pub async fn fetch_achievements() -> Result<ApiResponse<Vec<AchievementOnClient>>, ServerFnError> {
     let (response_options, db, user) =
-        match get_authenticated_user::<Vec<AchievementOnClient>>().await {
+        match get_authenticated_user_and_context::<Vec<AchievementOnClient>>().await {
             Ok(ctx) => ctx,
             Err(e) => return Ok(e),
         };
@@ -96,7 +96,7 @@ pub async fn fetch_achievements() -> Result<ApiResponse<Vec<AchievementOnClient>
 #[server(input = Json, output = Json, prefix = "/education", endpoint = "certificates")]
 pub async fn fetch_certificates() -> Result<ApiResponse<Vec<CertificateOnClient>>, ServerFnError> {
     let (response_options, db, user) =
-        match get_authenticated_user::<Vec<CertificateOnClient>>().await {
+        match get_authenticated_user_and_context::<Vec<CertificateOnClient>>().await {
             Ok(ctx) => ctx,
             Err(e) => return Ok(e),
         };
@@ -125,7 +125,7 @@ pub async fn fetch_certificates() -> Result<ApiResponse<Vec<CertificateOnClient>
 #[server(input = Json, output = Json, prefix = "/education", endpoint = "leaderboard")]
 pub async fn fetch_leaderboard() -> Result<ApiResponse<Vec<LeaderboardEntry>>, ServerFnError> {
     let (response_options, db, _user) =
-        match get_authenticated_user::<Vec<LeaderboardEntry>>().await {
+        match get_authenticated_user_and_context::<Vec<LeaderboardEntry>>().await {
             Ok(ctx) => ctx,
             Err(e) => return Ok(e),
         };

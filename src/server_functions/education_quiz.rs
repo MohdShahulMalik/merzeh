@@ -13,7 +13,7 @@ use crate::models::quiz::{
 #[cfg(feature = "ssr")]
 use crate::utils::parsing::parse_record_id;
 #[cfg(feature = "ssr")]
-use crate::utils::ssr::{ServerResponse, get_authenticated_user, get_server_context};
+use crate::utils::ssr::{ServerResponse, get_authenticated_user_and_context, get_server_context};
 
 #[cfg(feature = "ssr")]
 #[derive(Debug, Deserialize)]
@@ -92,7 +92,7 @@ pub async fn fetch_quiz_for_lesson(
 pub async fn submit_quiz(
     submission: QuizSubmission,
 ) -> Result<ApiResponse<QuizSubmissionResult>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<QuizSubmissionResult>().await
+    let (response_options, db, user) = match get_authenticated_user_and_context::<QuizSubmissionResult>().await
     {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),

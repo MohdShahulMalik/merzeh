@@ -20,7 +20,7 @@ use crate::services::course_stats::update_course_enrollment_count;
 #[cfg(feature = "ssr")]
 use crate::utils::parsing::parse_record_id;
 #[cfg(feature = "ssr")]
-use crate::utils::ssr::{ServerResponse, get_authenticated_user, get_server_context};
+use crate::utils::ssr::{ServerResponse, get_authenticated_user_and_context, get_server_context};
 
 #[cfg(feature = "ssr")]
 #[derive(Debug, Deserialize)]
@@ -133,7 +133,7 @@ pub async fn fetch_roadmap_detail(
 
 #[server(input = Json, output = Json, prefix = "/education", endpoint = "roadmap-start")]
 pub async fn start_roadmap(roadmap_id: String) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };

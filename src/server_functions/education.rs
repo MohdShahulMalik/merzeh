@@ -40,7 +40,7 @@ use crate::utils::education_auth::{is_course_owner, is_educator_or_admin};
 #[cfg(feature = "ssr")]
 use crate::utils::parsing::parse_record_id;
 #[cfg(feature = "ssr")]
-use crate::utils::ssr::{ServerResponse, get_authenticated_user, get_server_context};
+use crate::utils::ssr::{ServerResponse, get_authenticated_user_and_context, get_server_context};
 #[cfg(feature = "ssr")]
 use crate::utils::token_generator::generate_token;
 
@@ -434,7 +434,7 @@ pub async fn search_courses(
 
 #[server(input = Json, output = Json, prefix = "/education", endpoint = "enroll")]
 pub async fn enroll_course(course_id: String) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -488,7 +488,7 @@ pub async fn enroll_course(course_id: String) -> Result<ApiResponse<String>, Ser
 
 #[server(input = Json, output = Json, prefix = "/education", endpoint = "unenroll")]
 pub async fn unenroll_course(course_id: String) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -513,7 +513,7 @@ pub async fn unenroll_course(course_id: String) -> Result<ApiResponse<String>, S
 #[server(input = Json, output = Json, prefix = "/education", endpoint = "my-courses")]
 pub async fn fetch_my_courses() -> Result<ApiResponse<Vec<EnrollmentProgress>>, ServerFnError> {
     let (response_options, db, user) =
-        match get_authenticated_user::<Vec<EnrollmentProgress>>().await {
+        match get_authenticated_user_and_context::<Vec<EnrollmentProgress>>().await {
             Ok(ctx) => ctx,
             Err(e) => return Ok(e),
         };
@@ -548,7 +548,7 @@ pub async fn fetch_my_courses() -> Result<ApiResponse<Vec<EnrollmentProgress>>, 
 
 #[server(input = Json, output = Json, prefix = "/education", endpoint = "complete-lesson")]
 pub async fn complete_lesson(lesson_id: String) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -680,7 +680,7 @@ pub async fn complete_lesson(lesson_id: String) -> Result<ApiResponse<String>, S
 pub async fn fetch_course_progress(
     course_id: String,
 ) -> Result<ApiResponse<EnrollmentProgress>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<EnrollmentProgress>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<EnrollmentProgress>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -720,7 +720,7 @@ pub async fn fetch_course_progress(
 
 #[server(input = Json, output = Json, prefix = "/education/educator", endpoint = "courses")]
 pub async fn fetch_educator_courses() -> Result<ApiResponse<Vec<CourseOnClient>>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<Vec<CourseOnClient>>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<Vec<CourseOnClient>>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -760,7 +760,7 @@ pub async fn fetch_educator_courses() -> Result<ApiResponse<Vec<CourseOnClient>>
 pub async fn create_course(
     create_course: CreateCourseInput,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -821,7 +821,7 @@ pub async fn update_course(
     course_id: String,
     update: UpdateCourseInput,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -889,7 +889,7 @@ pub async fn update_course(
 
 #[server(input = Json, output = Json, prefix = "/education/educator", endpoint = "courses-publish")]
 pub async fn publish_course(course_id: String) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -943,7 +943,7 @@ pub async fn publish_course(course_id: String) -> Result<ApiResponse<String>, Se
 pub async fn create_module(
     create_module: CreateModuleInput,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -993,7 +993,7 @@ pub async fn update_module(
     module_id: String,
     update: UpdateModuleInput,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -1045,7 +1045,7 @@ pub async fn update_module(
 
 #[server(input = DeleteUrl, output = Json, prefix = "/education/educator", endpoint = "modules-delete")]
 pub async fn delete_module(module_id: String) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -1086,7 +1086,7 @@ pub async fn delete_module(module_id: String) -> Result<ApiResponse<String>, Ser
 pub async fn create_lesson(
     create_lesson: CreateLessonInput,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -1153,7 +1153,7 @@ pub async fn update_lesson(
     lesson_id: String,
     update: UpdateLessonInput,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -1222,7 +1222,7 @@ pub async fn update_lesson(
 
 #[server(input = DeleteUrl, output = Json, prefix = "/education/educator", endpoint = "lessons-delete")]
 pub async fn delete_lesson(lesson_id: String) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
