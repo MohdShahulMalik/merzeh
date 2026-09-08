@@ -11,7 +11,7 @@ use crate::{
 };
 use leptos::{
     prelude::ServerFnError,
-    server_fn::codec::{DeleteUrl, Json, PatchJson},
+    server_fn::codec::{DeleteUrl, GetUrl, Json, PatchJson},
     *,
 };
 
@@ -151,8 +151,7 @@ pub async fn add_mosques_of_region(
                 .unwrap_or((None, None, None, None));
 
             let cover_img = match wikimedia_commons {
-                Some(ref filename) if !filename.is_empty() => Some(
-                    format!(
+                Some(ref filename) if !filename.is_empty() => Some(format!(
                     "https://commons.wikimedia.org/wiki/Special:FilePath/{}",
                     filename
                 )),
@@ -229,10 +228,11 @@ pub async fn update_adhan_jamat_times(
     mosque_id: String,
     prayer_times: PrayerTimesUpdate,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, mosque_admin) = match get_authenticated_user_and_context::<String>().await {
-        Ok(ctx) => ctx,
-        Err(e) => return Ok(e),
-    };
+    let (response_options, db, mosque_admin) =
+        match get_authenticated_user_and_context::<String>().await {
+            Ok(ctx) => ctx,
+            Err(e) => return Ok(e),
+        };
     let responder = ServerResponse::new(response_options);
 
     let mosque_id: RecordId = match parse_record_id(&mosque_id, "mosque_id") {
@@ -240,18 +240,17 @@ pub async fn update_adhan_jamat_times(
         Err(e) => return Ok(e),
     };
 
-    if !mosque_admin.is_app_admin() {
-        if let Err(e) = is_mosque_admin(&mosque_admin.id, &mosque_id, &db).await {
-            let msg = match e {
-                UserElevationError::Unauthorized => {
-                    "The user trying to update mosque info is not an admin of that mosque"
-                        .to_string()
-                }
-                _ => "Failed to verify admin permissions".to_string(),
-            };
-            error!("{}", msg);
-            return Ok(responder.internal_server_error(msg));
-        }
+    if !mosque_admin.is_app_admin()
+        && let Err(e) = is_mosque_admin(&mosque_admin.id, &mosque_id, &db).await
+    {
+        let msg = match e {
+            UserElevationError::Unauthorized => {
+                "The user trying to update mosque info is not an admin of that mosque".to_string()
+            }
+            _ => "Failed to verify admin permissions".to_string(),
+        };
+        error!("{}", msg);
+        return Ok(responder.internal_server_error(msg));
     }
 
     db.update::<Option<MosqueRecord>>(mosque_id)
@@ -266,10 +265,11 @@ pub async fn add_admin(
     requested_user: String,
     mosque_id: String,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, mosque_supervisor) = match get_authenticated_user_and_context::<String>().await {
-        Ok(ctx) => ctx,
-        Err(e) => return Ok(e),
-    };
+    let (response_options, db, mosque_supervisor) =
+        match get_authenticated_user_and_context::<String>().await {
+            Ok(ctx) => ctx,
+            Err(e) => return Ok(e),
+        };
     let responder = ServerResponse::new(response_options);
 
     let requested_user: RecordId = match parse_record_id(&requested_user, "requested_user") {
@@ -321,10 +321,11 @@ pub async fn add_admin(
 pub async fn elevate_user_to_mosque_supervisor(
     user_id: String,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, app_admin) = match get_authenticated_user_and_context::<String>().await {
-        Ok(ctx) => ctx,
-        Err(e) => return Ok(e),
-    };
+    let (response_options, db, app_admin) =
+        match get_authenticated_user_and_context::<String>().await {
+            Ok(ctx) => ctx,
+            Err(e) => return Ok(e),
+        };
     let responder = ServerResponse::new(response_options);
 
     let user_id: RecordId = match parse_record_id(&user_id, "user_id") {
@@ -361,6 +362,65 @@ pub async fn elevate_user_to_mosque_supervisor(
             }
         },
     }
+}
+
+#[server(input = GetUrl, output = Json, prefix = "/mosques", endpoint = "favorite")]
+pub async fn get_favorite_mosque() -> Result<ApiResponse<Vec<MosqueResponse>>, ServerFnError> {
+    let (response_options, db, user) =
+        match get_authenticated_user_and_context::<Vec<MosqueResponse>>().await {
+            Ok(ctx) => ctx,
+            Err(e) => return Ok(e),
+        };
+
+    let responder = ServerResponse::new(response_options);
+    let user_id = user.id;
+
+    let favorite_mosques_query = r#"
+       SELECT $user_id -> favorited -> mosques; 
+    "#;
+
+    let result = db
+        .query(favorite_mosques_query)
+        .bind(("user_id", user_id))
+        .await;
+
+    let favorite_mosques_result = match result {
+        Ok(mut res) => res.take(0),
+        Err(e) => {
+            error!(
+                ?e,
+                "Some db error occured while quering for the user's favorite mosques"
+            );
+            return Ok(responder.internal_server_error::<Vec<MosqueResponse>>(
+                "DB error occured while getting the favorite mosques of the user".to_string(),
+            ));
+        }
+    };
+
+    let favorite_mosques: Vec<MosqueSearchResult> = match favorite_mosques_result {
+        Ok(mosques) => mosques,
+        Err(e) => {
+            error!(?e, "No favorite mosques for the user have been found");
+            return Ok(responder.not_found::<Vec<MosqueResponse>>(
+                "The user doesn't have any favorite mosques".to_string(),
+            ));
+        }
+    };
+
+    let favorite_mosques_response_result =
+        enrich_mosques_with_contacts(favorite_mosques, &db).await;
+
+    let favorite_mosques_response: Vec<MosqueResponse> = match favorite_mosques_response_result {
+        Ok(mosques) => mosques,
+        Err(e) => {
+            error!(?e, "Unable to enrichthe mosques with contacts");
+            return Ok(responder.internal_server_error::<Vec<MosqueResponse>>(
+                "Unable to create enriched mosque data with contacts".to_string(),
+            ));
+        }
+    };
+
+    return Ok(responder.ok::<Vec<MosqueResponse>>(favorite_mosques_response));
 }
 
 #[server(input = Json, output = Json, prefix = "/mosques", endpoint = "add-favorite")]
@@ -437,10 +497,11 @@ pub async fn update_mosque_personnel(
     person_id: String,
     mosque_id: String,
 ) -> Result<ApiResponse, ServerFnError> {
-    let (response_options, db, auth_user) = match get_authenticated_user_and_context::<String>().await {
-        Ok(ctx) => ctx,
-        Err(e) => return Ok(e),
-    };
+    let (response_options, db, auth_user) =
+        match get_authenticated_user_and_context::<String>().await {
+            Ok(ctx) => ctx,
+            Err(e) => return Ok(e),
+        };
     let responder = ServerResponse::new(response_options);
 
     if person_type != "imam" && person_type != "muazzin" {
@@ -459,18 +520,17 @@ pub async fn update_mosque_personnel(
         Err(e) => return Ok(e),
     };
 
-    if !auth_user.is_app_admin() {
-        if let Err(e) = is_mosque_admin(&auth_user.id, &mosque_id, &db).await {
-            let msg = match e {
-                UserElevationError::Unauthorized => {
-                    "The user trying to update mosque info is not an admin of that mosque"
-                        .to_string()
-                }
-                _ => "Failed to verify admin permissions".to_string(),
-            };
-            error!("{}", msg);
-            return Ok(responder.internal_server_error(msg));
-        }
+    if !auth_user.is_app_admin()
+        && let Err(e) = is_mosque_admin(&auth_user.id, &mosque_id, &db).await
+    {
+        let msg = match e {
+            UserElevationError::Unauthorized => {
+                "The user trying to update mosque info is not an admin of that mosque".to_string()
+            }
+            _ => "Failed to verify admin permissions".to_string(),
+        };
+        error!("{}", msg);
+        return Ok(responder.internal_server_error(msg));
     }
 
     let update_query = format!(
