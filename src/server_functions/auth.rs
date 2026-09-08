@@ -33,7 +33,7 @@ use crate::errors::auth::AuthError;
 #[cfg(feature = "ssr")]
 use crate::errors::session::SessionError;
 #[cfg(feature = "ssr")]
-use crate::utils::ssr::{ServerResponse, get_authenticated_user, get_server_context};
+use crate::utils::ssr::{ServerResponse, get_authenticated_user_and_context, get_server_context};
 #[cfg(feature = "ssr")]
 use actix_web::HttpRequest;
 #[cfg(feature = "ssr")]
@@ -102,7 +102,7 @@ pub async fn register(form: RegistrationFormData) -> Result<ApiResponse<String>,
 
 #[server(input = Json, output = Json, prefix = "/auth", endpoint = "login")]
 pub async fn login(form: LoginFormData) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, _user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, _user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -163,7 +163,7 @@ pub async fn login(form: LoginFormData) -> Result<ApiResponse<String>, ServerFnE
 
 #[server(input = Json, output = Json, prefix = "/auth", endpoint = "me")]
 pub async fn fetch_me() -> Result<ApiResponse<UserOnClient>, ServerFnError> {
-    let (response_options, _db, user) = match get_authenticated_user::<UserOnClient>().await {
+    let (response_options, _db, user) = match get_authenticated_user_and_context::<UserOnClient>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -174,7 +174,7 @@ pub async fn fetch_me() -> Result<ApiResponse<UserOnClient>, ServerFnError> {
 
 #[server(input=DeleteUrl, output=Json, prefix="/auth", endpoint="logout")]
 pub async fn logout() -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, _user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, _user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
