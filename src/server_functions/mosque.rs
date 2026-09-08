@@ -2,6 +2,7 @@
 use crate::{
     errors::user_elevation::UserElevationError,
     utils::{
+        mosque::enrich_mosques_with_contacts,
         parsing::parse_record_id,
         ssr::{ServerResponse, get_authenticated_user_and_context, get_server_context},
         user_elevation::elevate_user,
@@ -23,10 +24,6 @@ use crate::models::{
 use crate::models::mosque::{
     MosqueFromOverpass, MosqueRecord, MosqueSearchResult, OverpassResponse,
 };
-#[cfg(feature = "ssr")]
-use crate::models::user::{UserIdentifier, UserIdentifierOnClient};
-#[cfg(feature = "ssr")]
-use std::collections::{HashMap, HashSet};
 #[cfg(feature = "ssr")]
 use surrealdb::{RecordId, sql::Geometry};
 #[cfg(feature = "ssr")]
@@ -219,63 +216,7 @@ pub async fn fetch_mosques_for_location(
 
     let mosques: Vec<MosqueSearchResult> = response.take(0)?;
 
-    // 1. Collect unique user IDs for bulk identifier fetch
-    let mut user_ids = HashSet::new();
-    for mosque in &mosques {
-        if let Some(ref imam) = mosque.imam {
-            user_ids.insert(imam.id.to_string());
-        }
-        if let Some(ref muazzin) = mosque.muazzin {
-            user_ids.insert(muazzin.id.to_string());
-        }
-    }
-
-    // 2. Bulk fetch identifiers
-    let user_ids_vec: Vec<String> = user_ids.into_iter().collect();
-    let mut id_to_contacts: HashMap<RecordId, Vec<UserIdentifierOnClient>> = HashMap::new();
-
-    if !user_ids_vec.is_empty() {
-        let mut ident_res = db
-            .query("SELECT * FROM user_identifier WHERE user IN $user_ids")
-            .bind(("user_ids", user_ids_vec))
-            .await?;
-        let identifiers: Vec<UserIdentifier> = ident_res.take(0)?;
-
-        // 3. Map identifiers by User ID
-        for ident in identifiers {
-            id_to_contacts
-                .entry(ident.user)
-                .or_default()
-                .push(UserIdentifierOnClient::new(
-                    ident.identifier_type,
-                    ident.identifier_value,
-                ));
-        }
-    }
-
-    // 4. Assemble final MosqueResponse
-    let mosque_responses = mosques
-        .into_iter()
-        .map(|m| {
-            let imam_id = m.imam.as_ref().map(|u| u.id.clone());
-            let muazzin_id = m.muazzin.as_ref().map(|u| u.id.clone());
-            let mut res = m.from();
-
-            if let Some(id) = imam_id {
-                if let Some(contacts) = id_to_contacts.get(&id) {
-                    res.imam_contact = contacts.clone();
-                }
-            }
-
-            if let Some(id) = muazzin_id {
-                if let Some(contacts) = id_to_contacts.get(&id) {
-                    res.muazzin_contact = contacts.clone();
-                }
-            }
-
-            res
-        })
-        .collect();
+    let mosque_responses = enrich_mosques_with_contacts(mosques, &db).await?;
 
     Ok(ApiResponse {
         data: Some(mosque_responses),

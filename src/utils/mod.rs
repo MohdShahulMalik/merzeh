@@ -1,5 +1,7 @@
 #[cfg(feature = "ssr")]
 pub mod education_auth;
+#[cfg(feature = "ssr")]
+pub mod mosque;
 pub mod parsing;
 #[cfg(feature = "ssr")]
 pub mod ssr;
