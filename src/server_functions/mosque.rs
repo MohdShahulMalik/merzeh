@@ -3,7 +3,7 @@ use crate::{
     errors::user_elevation::UserElevationError,
     utils::{
         parsing::parse_record_id,
-        ssr::{ServerResponse, get_authenticated_user, get_server_context},
+        ssr::{ServerResponse, get_authenticated_user_and_context, get_server_context},
         user_elevation::elevate_user,
         user_elevation::is_mosque_admin,
     },
@@ -39,7 +39,7 @@ pub async fn add_mosques_of_region(
     north: f64,
     east: f64,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -288,7 +288,7 @@ pub async fn update_adhan_jamat_times(
     mosque_id: String,
     prayer_times: PrayerTimesUpdate,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, mosque_admin) = match get_authenticated_user::<String>().await {
+    let (response_options, db, mosque_admin) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -325,7 +325,7 @@ pub async fn add_admin(
     requested_user: String,
     mosque_id: String,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, mosque_supervisor) = match get_authenticated_user::<String>().await {
+    let (response_options, db, mosque_supervisor) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -380,7 +380,7 @@ pub async fn add_admin(
 pub async fn elevate_user_to_mosque_supervisor(
     user_id: String,
 ) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, app_admin) = match get_authenticated_user::<String>().await {
+    let (response_options, db, app_admin) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -424,7 +424,7 @@ pub async fn elevate_user_to_mosque_supervisor(
 
 #[server(input = Json, output = Json, prefix = "/mosques", endpoint = "add-favorite")]
 pub async fn add_favorite(mosque_id: String) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -458,7 +458,7 @@ pub async fn add_favorite(mosque_id: String) -> Result<ApiResponse<String>, Serv
 
 #[server(input = DeleteUrl, output = Json, prefix = "/mosques", endpoint = "/remove-favorite")]
 pub async fn remove_favorite(mosque_id: String) -> Result<ApiResponse<String>, ServerFnError> {
-    let (response_options, db, user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
@@ -496,7 +496,7 @@ pub async fn update_mosque_personnel(
     person_id: String,
     mosque_id: String,
 ) -> Result<ApiResponse, ServerFnError> {
-    let (response_options, db, auth_user) = match get_authenticated_user::<String>().await {
+    let (response_options, db, auth_user) = match get_authenticated_user_and_context::<String>().await {
         Ok(ctx) => ctx,
         Err(e) => return Ok(e),
     };
