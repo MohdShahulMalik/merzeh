@@ -37,7 +37,7 @@ pub async fn get_server_context<T>() -> Result<(ResponseOptions, Surreal<Client>
 }
 
 #[cfg(feature = "ssr")]
-pub async fn get_authenticated_user<T>()
+pub async fn get_authenticated_user_and_context<T>()
 -> Result<(ResponseOptions, Surreal<Client>, User), ApiResponse<T>> {
     let (response_options, db) = get_server_context::<T>().await?;
 
