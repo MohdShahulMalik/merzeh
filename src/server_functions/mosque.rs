@@ -448,6 +448,20 @@ pub async fn get_favorite_mosque(
         );
     }
 
+    if lat.is_some() {
+        return Ok(responder.bad_request::<MixedMosqueResponse>(
+            "Both latitude and longitude must be provided to find the closest favorite mosque"
+                .to_string(),
+        ));
+    }
+
+    if lon.is_some() {
+        return Ok(responder.bad_request::<MixedMosqueResponse>(
+            "Both latitude and longitude must be provided to find the closest favorite mosque"
+                .to_string(),
+        ));
+    }
+
     let favorite_mosques_query = r#"
        SELECT *
        FROM $user_id -> favorited -> mosques
