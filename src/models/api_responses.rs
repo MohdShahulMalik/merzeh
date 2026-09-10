@@ -44,3 +44,9 @@ pub struct MosqueResponse {
     pub imam_contact: Vec<UserIdentifierOnClient>,
     pub muazzin_contact: Vec<UserIdentifierOnClient>,
 }
+
+#[derive(Debug, Deserialize, Serialize)]
+pub enum MixedMosqueResponse {
+    MosquesVec(Vec<MosqueResponse>),
+    SingleMosque(MosqueResponse),
+}
