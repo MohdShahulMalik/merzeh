@@ -16,7 +16,7 @@ use leptos::{
 };
 
 use crate::models::{
-    api_responses::{ApiResponse, MosqueResponse},
+    api_responses::{ApiResponse, MixedMosqueResponse, MosqueResponse},
     mosque::PrayerTimesUpdate,
 };
 
@@ -365,9 +365,12 @@ pub async fn elevate_user_to_mosque_supervisor(
 }
 
 #[server(input = GetUrl, output = Json, prefix = "/mosques", endpoint = "favorite")]
-pub async fn get_favorite_mosque() -> Result<ApiResponse<Vec<MosqueResponse>>, ServerFnError> {
+pub async fn get_favorite_mosque(
+    lat: Option<f64>,
+    lon: Option<f64>,
+) -> Result<ApiResponse<MixedMosqueResponse>, ServerFnError> {
     let (response_options, db, user) =
-        match get_authenticated_user_and_context::<Vec<MosqueResponse>>().await {
+        match get_authenticated_user_and_context::<MixedMosqueResponse>().await {
             Ok(ctx) => ctx,
             Err(e) => return Ok(e),
         };
@@ -391,7 +394,7 @@ pub async fn get_favorite_mosque() -> Result<ApiResponse<Vec<MosqueResponse>>, S
                 ?e,
                 "Some db error occured while quering for the user's favorite mosques"
             );
-            return Ok(responder.internal_server_error::<Vec<MosqueResponse>>(
+            return Ok(responder.internal_server_error::<MixedMosqueResponse>(
                 "DB error occured while getting the favorite mosques of the user".to_string(),
             ));
         }
@@ -401,7 +404,7 @@ pub async fn get_favorite_mosque() -> Result<ApiResponse<Vec<MosqueResponse>>, S
         Ok(mosques) => mosques,
         Err(e) => {
             error!(?e, "No favorite mosques for the user have been found");
-            return Ok(responder.not_found::<Vec<MosqueResponse>>(
+            return Ok(responder.not_found::<MixedMosqueResponse>(
                 "The user doesn't have any favorite mosques".to_string(),
             ));
         }
@@ -414,13 +417,14 @@ pub async fn get_favorite_mosque() -> Result<ApiResponse<Vec<MosqueResponse>>, S
         Ok(mosques) => mosques,
         Err(e) => {
             error!(?e, "Unable to enrichthe mosques with contacts");
-            return Ok(responder.internal_server_error::<Vec<MosqueResponse>>(
+            return Ok(responder.internal_server_error::<MixedMosqueResponse>(
                 "Unable to create enriched mosque data with contacts".to_string(),
             ));
         }
     };
 
-    return Ok(responder.ok::<Vec<MosqueResponse>>(favorite_mosques_response));
+    return Ok(responder
+        .ok::<MixedMosqueResponse>(MixedMosqueResponse::MosquesVec(favorite_mosques_response)));
 }
 
 #[server(input = Json, output = Json, prefix = "/mosques", endpoint = "add-favorite")]
