@@ -101,6 +101,7 @@ async fn test_add_admin_endpoint(
             location: Geometry::Point((9.00, 8.00).into()),
             city: None,
             street: None,
+            cover_img: None,
         })
         .await
         .expect("failed to create a new mosque");
