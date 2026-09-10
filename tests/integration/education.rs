@@ -259,6 +259,7 @@ async fn create_course_record(
             status,
             language: "en".to_string(),
             thumbnail_url: Some("https://example.com/thumb.png".to_string()),
+            video_url: None,
             duration_minutes: 0,
             lesson_count: 0,
             enrollment_count: 0,
@@ -841,6 +842,7 @@ async fn education_educator_endpoints_manage_course_module_and_lesson() {
                 level: CourseLevel::Intermediate,
                 language: "en".to_string(),
                 thumbnail_url: Some("https://example.com/career.png".to_string()),
+                video_url: None,
             },
         })
         .send()
@@ -901,6 +903,7 @@ async fn education_educator_endpoints_manage_course_module_and_lesson() {
                 status: None,
                 language: Some("en-US".to_string()),
                 thumbnail_url: Some("https://example.com/career-new.png".to_string()),
+                video_url: None,
                 duration_minutes: Some(45),
             },
         })
