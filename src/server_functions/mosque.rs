@@ -378,6 +378,76 @@ pub async fn get_favorite_mosque(
     let responder = ServerResponse::new(response_options);
     let user_id = user.id;
 
+    if lat.is_some() && lon.is_some() {
+        let closest_favorited_mosque_query = r#"
+            SELECT *, geo::distance(location, $point) AS distance
+            FROM $user_id -> favorited -> mosques
+            ORDER BY distance ASC
+            LIMIT 1
+            FETCH imam, muazzin;
+        "#;
+
+        let point = Geometry::Point((lon.unwrap(), lat.unwrap()).into());
+
+        let query_result = db
+            .query(closest_favorited_mosque_query)
+            .bind(("user_id", user_id))
+            .bind(("point", point))
+            .await;
+
+        let closest_favorited_mosque_result = match query_result {
+            Ok(mut res) => res.take::<Option<MosqueSearchResult>>(0),
+            Err(e) => {
+                error!(
+                    ?e,
+                    "Some db error occured while quering for the user's closest favorite mosque"
+                );
+                return Ok(responder.internal_server_error::<MixedMosqueResponse>(
+                    "DB error occured while getting the closest favorite mosque of the user"
+                        .to_string(),
+                ));
+            }
+        };
+
+        let closest_favorited_mosque: MosqueSearchResult = match closest_favorited_mosque_result {
+            Ok(Some(mosque)) => mosque,
+            Ok(None) => {
+                return Ok(responder.not_found::<MixedMosqueResponse>(
+                    "The user doesn't have any favorite mosques".to_string(),
+                ));
+            }
+            Err(e) => {
+                error!(?e, "No favorite mosques for the user have been found");
+                return Ok(responder.not_found::<MixedMosqueResponse>(
+                    "The user doesn't have any favorite mosques".to_string(),
+                ));
+            }
+        };
+
+        let closest_favorited_mosque_response_result =
+            enrich_mosques_with_contacts(vec![closest_favorited_mosque], &db).await;
+
+        let closest_favorited_mosque_response: MosqueResponse =
+            match closest_favorited_mosque_response_result {
+                Ok(mut mosque) => mosque.swap_remove(0),
+                Err(e) => {
+                    error!(
+                        ?e,
+                        "Unable to enrich the closest favorite mosque with contacts"
+                    );
+                    return Ok(responder.internal_server_error::<MixedMosqueResponse>(
+                        "Unable to create enriched mosque data with contacts".to_string(),
+                    ));
+                }
+            };
+
+        return Ok(
+            responder.ok::<MixedMosqueResponse>(MixedMosqueResponse::SingleMosque(
+                closest_favorited_mosque_response,
+            )),
+        );
+    }
+
     let favorite_mosques_query = r#"
        SELECT *
        FROM $user_id -> favorited -> mosques
