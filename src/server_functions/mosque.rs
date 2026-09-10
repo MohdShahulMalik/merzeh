@@ -379,7 +379,9 @@ pub async fn get_favorite_mosque(
     let user_id = user.id;
 
     let favorite_mosques_query = r#"
-       SELECT $user_id -> favorited -> mosques; 
+       SELECT *
+       FROM $user_id -> favorited -> mosques
+       FETCH imam, muazzin; 
     "#;
 
     let result = db
