@@ -5,6 +5,8 @@ mod common;
 mod education;
 #[path = "integration/events.rs"]
 mod events;
+#[path = "integration/favorite_mosque.rs"]
+mod favorite_mosque;
 #[path = "integration/mosque.rs"]
 mod mosque;
 #[path = "integration/mosque_admin.rs"]

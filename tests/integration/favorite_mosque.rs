@@ -1,0 +1,1 @@
+//! Favorite mosque integration tests.
